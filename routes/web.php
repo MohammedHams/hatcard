@@ -5,7 +5,7 @@ use Jenssegers\Mongodb\Connection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Agent\LoginController;
 use App\Http\Controllers\Agent\DashboardController;
-
+use App\Http\Controllers\Agent\NetworkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +21,11 @@ Route::post('/login',[LoginController::class,'login'])->name('agent.login');
 
 Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('logout', [AuthController::class, 'logout'])->name('agent.logout');
+    Route::get('/network', [NetworkController::class, 'index'])->name('network.index');
+    Route::get('/network/show/{id}', [NetworkController::class, 'show'])->name('network.show');
+    Route::get('/network/create', [NetworkController::class, 'create'])->name('network.create');
+
+    Route::get('logout', [DashboardController::class, 'logout'])->name('agent.logout');
 
     // Other routes that need the 'agent.auth' middleware can be added here
 });
