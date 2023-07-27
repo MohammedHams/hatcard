@@ -35,7 +35,7 @@ class connect extends Command
             // Output the user data
             $this->info('Connected to MongoDB. User count: ' . $users->count());
             foreach ($users as $user) {
-                $this->line('Name: ' . $user->name . ', mobile: ' . $user->mobile_no);
+                $this->line('Name: ' . $user->name . ', mobile: ' . $user->phone);
                 // Access other user properties as needed...
             }
         } catch (\Exception $e) {
