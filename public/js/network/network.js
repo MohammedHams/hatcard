@@ -34,6 +34,30 @@ var Networks = function () {
             );
         });
     };
+        $('#citySelect').on('change', function () {
+            var cityId = $(this).val();
+            if (cityId) {
+                $.ajax({
+                    url: `/agent/network/${cityId}`,
+                    type: 'GET',
+                    data: {cityId: cityId},
+                    dataType: 'json',
+                    success: function (data) {
+                        var options = '<option value="">اختر منطقة</option>';
+                        $.each(data, function (key, area) {
+                            options += '<option value="' + area._id + '">' + area.name + '</option>';
+                        });
+                        $('#areaSelect').html(options);
+                    },
+                    error: function (error) {
+                        console.error('Error fetching areas:', error);
+                    }
+                });
+            } else {
+                $('#areaSelect').html('<option value="">اختر منطقة</option>');
+            }
+        });
+
 
 
 

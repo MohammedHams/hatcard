@@ -7,6 +7,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use MongoDB\BSON\ObjectId;
+
 class User extends Eloquent implements Authenticatable
 {
     use HasApiTokens, Notifiable;
@@ -91,6 +93,10 @@ class User extends Eloquent implements Authenticatable
     public function getAuthIdentifierName()
     {
         return $this->primaryKey;
+    }
+    public function setIdAttribute($value)
+    {
+        $this->attributes['_id'] = new ObjectId($value);
     }
 
 }

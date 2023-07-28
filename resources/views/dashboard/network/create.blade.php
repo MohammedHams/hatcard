@@ -13,163 +13,121 @@
             </div>
         </div>
         <!--begin::Form-->
-        {!! Form::open() !!}
+        {!! Form::open(['route' => 'network.store','method' => 'post','class' => 'form-horizontal network-store','role' => 'form','files' => true]) !!}
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label> الإسم الاول<span class="text-danger">*</span></label>
-                        <input id="first_name" type="text" name="p_first_name" class="form-control"
-                               placeholder="الإسم الاول"
-                               maxlength="500" readonly/>
+                        <label>رقم جوال المالك<span class="text-danger">*</span></label>
+                        <input id="phone" type="number" name="phone" class="form-control"
+                               placeholder="رقم جوال المالك"
+                               maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>اسم الاب<span class="text-danger">*</span></label>
-                        <input id="second_name" type="text" name="p_second_name" class="form-control"
-                               placeholder="اسم الاب"
-                               maxlength="500" readonly/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>اسم الجد<span class="text-danger">*</span></label>
-                        <input id="third_name" type="text" name="p_third_name" class="form-control"
-                               placeholder="اسم الجد"
-                               maxlength="500" readonly/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>اسم العائله<span class="text-danger">*</span></label>
-                        <input id="last_name" type="text" name="p_last_name" class="form-control"
-                               placeholder="اسم العائله"
-                               maxlength="500" readonly/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>تاريخ الميلاد<span class="text-danger">*</span></label>
-                        <input type="date" id="birth_date" name="p_birth_date" class="form-control" maxlength="500" readonly/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>الجنس<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>المهنة<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>مكان العمل<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>مقدمة الجوال<span class="text-danger">*</span></label>
-                        <select id="" name="p_mobile_prefix" class="form-control form-select" style="direction: ltr;" maxlength="500">
-                        </select>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>رقم الجوال<span class="text-danger">*</span></label>
-                        <input type="text" id="" name="p_mobile_number" class="form-control" style="direction: ltr;" maxlength="500"/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>المحافظة<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>المدينة<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>الحي<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>نوع المعلم<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>اقرب معلم<span class="text-danger">*</span></label>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>اسم الشارع<span class="text-danger">*</span></label>
-                        <input type="text" name="street_name" class="form-control street_name_special">
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-            </div>
-            {{--<div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>اخر مؤهل علمي<span class="text-danger">*</span></label>
-                        <input value="" type="text" name="p_last_qualification" class="form-control"
-                               placeholder="اخر مؤهل علمي"
+                        <label>اسم الشبكة<span class="text-danger">*</span></label>
+                        <input id="name" type="text" name="name" class="form-control"
+                               placeholder="اسم الشبكة"
                                maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label>التخصص<span class="text-danger">*</span></label>
-                        <input value="" type="text" name="p_last_speciality" class="form-control" placeholder="التخصص"
+                        <label>اسم المالك<span class="text-danger">*</span></label>
+                        <input id="owner" type="text" name="owner" class="form-control"
+                               placeholder="اسم المالك"
                                maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
-            </div>--}}
-            <button data-close-modal="#OpenModal" data-form-class="form-building" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+
+                <div class="form-group">
+                    {!! Form::label('city', 'المدينة', ['class' => 'control-label']) !!}
+                    {!! Form::select('city', $cities->pluck('name', '_id'), null, ['class' => 'form-control', 'placeholder' => 'اختر مدينة', 'id' => 'citySelect']) !!}
+                    <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('area', 'المنطقة', ['class' => 'control-label']) !!}
+                    {!! Form::select('area', ['' => 'اختر منطقة'], null, ['class' => 'form-control', 'id' => 'areaSelect']) !!}
+                    <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                </div>
+                </div>
 
         </div>
+            <div class="row">
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label>اسم الحساب على فيسبوك</label>
+                    <input id="facebook" type="text" name="facebook" class="form-control"
+                           placeholder="اسم الحساب"
+                           maxlength="500"/>
+
+                    <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label>اسم الحساب على انستغرام</label>
+                    <input id="instagram" type="text" name="instagram" class="form-control"
+                           placeholder="اسم الحساب"
+                           maxlength="500"/>
+
+                    <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                </div>
+                </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label>رابط موقعك الالكتروني ان وجد</label>
+                    <input id="webUrl" type="text" name="webUrl" class="form-control"
+                           placeholder="رابط الموقع"
+                           maxlength="500"/>
+
+                    <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>رابط الدخول للشبكة<span class="text-danger">*</span></label>
+                        <input id="url" type="text" name="url" class="form-control"
+                               placeholder="رابط الشبكة"
+                               maxlength="500"/>
+
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>اختر صورة غلاف الشبكة<span class="text-danger">*</span></label>
+                        <input id="cover" type="file" name="cover" class="form-control"
+                               placeholder=" صورة الغلاف"
+                               maxlength="500"/>
+
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                    </div>
+                </div>
+
+            </div>
         <div class="card-footer text-right modal-footer">
-        <!-- <button type="button" class="btn btn-success btn-save mr-2">حفظ</button> -->
+            <button data-close-modal="#OpenModal" data-form-class="network-store" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
         </div>
-    {!! Form::close() !!}
+
+        {!! Form::close() !!}
     <!--end::Form-->
     </div>
-
+    </div>
 @endsection
 
 @push('scripts')

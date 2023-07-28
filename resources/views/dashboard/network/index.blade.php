@@ -1,11 +1,12 @@
 @extends('layouts.dashboard.app')
 @section('content')
-    <button type="button" data-title="اضافة شبكة"  href="{{ route('network.create') }}"
+    <div class="col-sm-4">
+    <button type="button" data-title="اضافة شبكة" data-size="modal-lg"  href="{{ route('network.create') }}"
             class="btn btn-success font-weight-bold openModal">
         <i class="fa fa-plus"></i>
         اضافة شبكة
     </button>
-
+    </div>
     <div id="kt_datatable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <div class="row">
                 <div class="col-sm-12">
@@ -14,6 +15,7 @@
                         <tr>
                             <th data-data="name">اسم الشبكة</th>
                             <th data-data="owner">المالك</th>
+                            <th data-data="image" width="200px" >الصورة</th>
                             <th data-data="phone">رقم الهاتف</th>
                             <th data-data="action" width="100px">اجراءات</th>
                         </tr>

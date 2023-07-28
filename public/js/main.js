@@ -6,7 +6,16 @@ function getModalContent(sourceUrl, modalWrapper, Title,modalSize,pageLoad) {
     $(modalWrapper + ' .modal-dialog').addClass(modalSize);
     $(modalWrapper).modal('show');
     $(modalWrapper + " .modal-title").html(Title);
-    $(modalWrapper + " .modal-body").html("<h1>الرجاء الانتظار قليلا....</h1>");
+// Assuming you already have the 'modalWrapper' variable defined.
+    $(modalWrapper + " .modal-body").html(`
+  <!-- SVG loading animation -->
+  <div class="svg-loader">
+    <svg class="svg-container" height="100" width="100" viewBox="0 0 100 100">
+      <circle class="loader-svg bg" cx="50" cy="50" r="45"></circle>
+      <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
+    </svg>
+  </div>
+`);
     $.ajax({
         method: "GET",
         url: sourceUrl,
@@ -427,6 +436,8 @@ function FnDataTable (dtable,search_data=[]){
             url:((route.indexOf("?") == -1) ? (route+"?IsDataTable=true") : (route+"&IsDataTable=true")),
             data:search_data
         },
+        lengthMenu: [5, 10, 25, 50], // Display 5, 10, 25, 50 records per page
+        pageLength: 5, // Set the default page length to 5
         language: {
             "paginate": {
                 "first":      "الأول",
