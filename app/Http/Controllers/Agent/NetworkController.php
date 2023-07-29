@@ -15,7 +15,7 @@ class NetworkController extends Controller
 {
     public function index(Request $request)
     {
-      if ($request->ajax()) {
+      if ($request->ajax()&& !$request->has('is_view')) {
             $row = Network::where('owner_id', new ObjectId(Auth::id()))
                 ->select(['_id', 'name', 'owner', 'phone','cover'])
                 ->get();

@@ -26,6 +26,7 @@ Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
     Route::get('/network/create', [NetworkController::class, 'create'])->name('network.create');
     Route::get('/network/edit/{id}', [NetworkController::class, 'edit'])->name('network.edit');
     Route::post('/network/update/{id}', [NetworkController::class, 'update'])->name('network.update');
+    Route::get('/network/show/{id}', [NetworkController::class, 'show'])->name('network.show');
 
     Route::get('/network/{cityId}', [NetworkController::class, 'getAreaByCityId']);
     Route::get('logout', [DashboardController::class, 'logout'])->name('agent.logout');

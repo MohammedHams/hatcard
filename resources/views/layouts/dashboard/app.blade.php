@@ -371,7 +371,7 @@
 <!--end::Global Javascript Bundle-->
 <!--begin::Page Vendors Javascript(used by this page)-->
 <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
-@stack('scripts')
+@yield('scripts')
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 </body>

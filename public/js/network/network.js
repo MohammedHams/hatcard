@@ -34,13 +34,15 @@ var Networks = function () {
             );
         });
     };
-        $('#citySelect').on('change', function () {
+    var attachEventHandlers = function () {
+        // Event delegation for the change event on #citySelect
+        $(document).on('change', '#citySelect', function () {
             var cityId = $(this).val();
             if (cityId) {
                 $.ajax({
                     url: `/agent/network/${cityId}`,
                     type: 'GET',
-                    data: {cityId: cityId},
+                    data: { cityId: cityId },
                     dataType: 'json',
                     success: function (data) {
                         var options = '<option value="">اختر منطقة</option>';
@@ -57,7 +59,7 @@ var Networks = function () {
                 $('#areaSelect').html('<option value="">اختر منطقة</option>');
             }
         });
-
+    };
 
 
 
@@ -65,6 +67,7 @@ var Networks = function () {
         init: function () {
             viewTable();
             deleteFn();
+            attachEventHandlers();
         }
     };
 }();
