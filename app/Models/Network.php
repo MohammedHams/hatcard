@@ -26,6 +26,12 @@ class Network extends Eloquent
         'slug',
         'owner_id',
     ];
+    public $timestamps = true;
+
+    // Specify the name of the "updated_at" field in the database
+    const UPDATED_AT = 'updatedAt';
+    const CREATED_AT  = 'createdAt';
+
     public function setCityAttribute($value)
     {
         $this->attributes['city'] = new ObjectId($value);

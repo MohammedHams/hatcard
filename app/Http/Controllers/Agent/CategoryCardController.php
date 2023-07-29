@@ -1,0 +1,205 @@
+<?php
+
+namespace App\Http\Controllers\Agent;
+
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request; // Corrected the import here
+use Illuminate\Support\Facades\Auth;
+use App\Models\CategoryCard;
+use Illuminate\Validation\ValidationException;
+use MongoDB\BSON\ObjectId;
+
+class CategoryCardController extends Controller
+{
+    public function index(Request $request)
+    {
+        $id = $request->query('id');
+        if ($request->ajax()&& !$request->has('is_view')) {
+            $row = CategoryCard::where('network', new ObjectId($id))->get();
+            return DataTables::of($row)
+                ->addColumn('image', function ($row) {
+                    // Assuming $row->photo contains the relative path to the image within the public directory.
+                    $imageUrl = asset($row->photo);
+
+                    // Replace 'your_static_image_url' with the actual URL of the image you want to display.
+                    return '<img src="' . $imageUrl . '" alt="Static Image" width="200">';
+                })
+
+                ->addColumn('action', function ($row) {
+                    return view('dashboard.category-cards.components.action', ['id' => $row->_id])->render();
+                })
+                ->rawColumns(['image','action'])
+                ->make(true);
+        }
+
+        return view('dashboard.category-cards.index',compact('id'));
+
+    }
+
+    public function create(Request $request)
+    {
+        $id = $request->id;
+        return view('dashboard.category-cards.create',compact('id'));
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            // Validate the incoming request data, including image file
+            $validatedData = $request->validate([
+                'cname' => 'required|max:500',
+                'price' => 'required|numeric',
+                'period' => 'required|numeric',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
+                'network' => 'required|exists:networks,_id', // Make sure the network ID exists in the networks collection
+            ]);
+
+            // Prepare the data to be saved in the database
+            $data = [
+                'cname' => $validatedData['cname'],
+                'price' => $validatedData['price'],
+                'period' => $validatedData['period'],
+                'network' => new ObjectId($validatedData['network']),
+            ];
+
+            // Handle the photo upload if provided
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $fileExtension = $file->getClientOriginalExtension();
+
+                // Create a new instance of CategoryCard
+                $categoryCard = new CategoryCard($data);
+
+                // Save the category card to the database (this will insert a new document)
+                $categoryCard->save();
+
+                // Generate the category card ID and use it in the image file name
+                $categoryId = $categoryCard->_id;
+                $fileName = 'category-' . $categoryId . '.' . $fileExtension;
+
+                // Define the directory where the file will be stored
+                $directory = 'imgs/networks/network-' . $data['network'];
+
+                // Save the image file to the specified directory
+                $file->move(public_path($directory), $fileName);
+
+                // Update the category card record with the image URL
+                $categoryCard->update(['photo' => $directory . '/' . $fileName]);
+            }
+
+            // Save the data to the database
+
+            $response = [
+                'success' => true,
+                'message' => 'تم إضافة الفئة بنجاح!',
+                'data' => $data, // Optionally, you can send back the newly created category card data in the response
+            ];
+
+            // Return the JSON response
+            return response()->json($response);
+        } catch (ValidationException $e) {
+            // If validation fails, return the validation errors as a JSON response
+            return response()->json($e->errors(), 422);
+        } catch (\Exception $e) {
+            // If any other exception occurs, return an error response with an appropriate message
+            return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function show($id)
+    {
+    }
+
+    public function edit($id)
+    {
+        try {
+            // Retrieve the CategoryCard record by its ID
+            $categoryCard = CategoryCard::findOrFail($id);
+
+            // You may want to retrieve additional data like networks if needed
+            // For example: $networks = Network::all();
+
+            // Return the view that contains the edit form along with the retrieved data
+            return view('dashboard.category-cards.edit', compact('categoryCard'));
+        } catch (\Exception $e) {
+            // Handle the exception (e.g., show an error page or redirect with a message)
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            // Validate the incoming request data, similar to the 'store' function
+            $validatedData = $request->validate([
+                'cname' => 'required|max:500',
+                'price' => 'required|numeric',
+                'period' => 'required|numeric',
+                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
+                'network' => 'required|exists:networks,_id', // Make sure the network ID exists in the networks collection
+            ]);
+
+            // Prepare the data to be updated in the database
+            $data = [
+                'cname' => $validatedData['cname'],
+                'price' => $validatedData['price'],
+                'period' => $validatedData['period'],
+                'network' => new ObjectId($validatedData['network']),
+            ];
+
+            // Find the CategoryCard record by its ID
+            $categoryCard = CategoryCard::findOrFail($id);
+
+            // Handle the photo update if provided
+            if ($request->hasFile('photo')) {
+                // Handle the new image upload similar to the 'store' function
+                $file = $request->file('photo');
+                $fileExtension = $file->getClientOriginalExtension();
+
+                // Generate the new image file name with the category card ID
+                $newFileName = 'category-' . $id . '.' . $fileExtension;
+
+                // Define the directory where the file will be stored
+                $directory = 'imgs/networks/network-' . $data['network'];
+
+                // Save the new image file to the specified directory
+                $file->move(public_path($directory), $newFileName);
+
+                // Update the 'photo' field in the $data array with the new image URL
+                $data['photo'] = $directory . '/' . $newFileName;
+
+                // Remove the old image file if it exists
+                if ($categoryCard->photo && file_exists(public_path($categoryCard->photo))) {
+                    unlink(public_path($categoryCard->photo));
+                }
+            }
+
+            // Update the CategoryCard record with the new data
+            $categoryCard->update($data);
+            $response = [
+                'success' => true,
+                'message' => 'تم تعديل الفئة بنجاح!',
+                'data' => $data, // Optionally, you can send back the newly created category card data in the response
+            ];
+
+            // Return the JSON response
+            return response()->json($response);
+
+            // Return a success response or redirect back with a success message
+            // ...
+
+        } catch (ValidationException $e) {
+            // If validation fails, return the validation errors as a JSON response or redirect back with errors
+            // ...
+
+        } catch (\Exception $e) {
+            // If any other exception occurs, return an error response with an appropriate message or redirect back with an error message
+            // ...
+
+        }
+    }
+
+    public function destroy($id)
+    {
+    }
+}

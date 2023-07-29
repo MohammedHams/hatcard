@@ -13,7 +13,7 @@
             </div>
         </div>
         <!--begin::Form-->
-        {!! Form::model($network, ['route' => ['network.update', $network->id], 'method' => 'post', 'class' => 'form-horizontal network-store', 'role' => 'form', 'files' => true]) !!}
+        {!! Form::model($network, ['route' => ['network.update', $network->id], 'method' => 'put', 'class' => 'form-horizontal network-edit', 'role' => 'form', 'files' => true]) !!}
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
@@ -101,7 +101,7 @@
 
             </div>
             <div class="card-footer text-right modal-footer">
-                <button data-close-modal="#OpenModal" data-form-class="network-store" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
+                <button data-close-modal="#OpenModal" data-form-class="network-edit" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
             </div>
 
         {!! Form::close() !!}
