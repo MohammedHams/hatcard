@@ -24,13 +24,17 @@ class CategoryRequest extends FormRequest
 
     public function rules()
     {
-        return [
+        $rules = [
             'cname' => 'required|max:500',
             'price' => 'required|numeric',
             'period' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'network' => 'required|exists:networks,_id',
         ];
+        if ($this->isMethod('post'))
+            $rules['photo'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+
+        return $rules;
     }
     public function messages()
     {
