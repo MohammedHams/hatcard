@@ -23,7 +23,7 @@
                         <input id="cname" type="text" value="{{$categoryCard->cname ? :''}}" name="cname" class="form-control"
                                placeholder="اسم الفئة"
                                maxlength="500"/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -32,7 +32,7 @@
                         <input id="price" type="number" value="{{$categoryCard->price ? :''}}"  name="price" class="form-control"
                                placeholder="سعر الفئة"
                                maxlength="500"/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
                                placeholder="فترة البطاقة"
                                maxlength="500"/>
 
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -55,7 +55,7 @@
                                placeholder=" صورة الغلاف"
                                maxlength="500"/>
 
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
                     </div>
                 </div>
 

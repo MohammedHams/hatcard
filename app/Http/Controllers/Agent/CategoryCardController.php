@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Agent;
-
+use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; // Corrected the import here
 use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryCard;
-use Illuminate\Validation\ValidationException;
 use MongoDB\BSON\ObjectId;
 
 class CategoryCardController extends Controller
@@ -168,10 +167,6 @@ class CategoryCardController extends Controller
                 // Update the 'photo' field in the $data array with the new image URL
                 $data['photo'] = $directory . '/' . $newFileName;
 
-                // Remove the old image file if it exists
-                if ($categoryCard->photo && file_exists(public_path($categoryCard->photo))) {
-                    unlink(public_path($categoryCard->photo));
-                }
             }
 
             // Update the CategoryCard record with the new data
