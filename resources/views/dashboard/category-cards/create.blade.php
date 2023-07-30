@@ -9,10 +9,8 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>اسم الفئة<span class="text-danger">*</span></label>
-                        <input id="cname" type="text" name="cname" class="form-control"
-                               placeholder="اسم الفئة"
-                               maxlength="500"/>
+                        <label for="cname">اسم الفئة<span class="text-danger">*</span></label>
+                        <input id="cname" type="text" name="cname" class="form-control" placeholder="اسم الفئة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>

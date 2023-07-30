@@ -5,12 +5,6 @@
             <h3 class="card-title">
                 اضافة شبكة
             </h3>
-            <div class="card-toolbar">
-                <div class="example-tools justify-content-center">
-                    <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                    <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                </div>
-            </div>
         </div>
         <!--begin::Form-->
         {!! Form::open(['route' => 'network.store','method' => 'post','class' => 'form-horizontal network-store','role' => 'form','files' => true]) !!}
@@ -19,9 +13,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>رقم جوال المالك<span class="text-danger">*</span></label>
-                        <input id="phone" type="number" name="phone" class="form-control"
-                               placeholder="رقم جوال المالك"
-                               maxlength="500"/>
+                        <input id="phone" type="number" name="phone" class="form-control" placeholder="رقم جوال المالك" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
@@ -29,18 +21,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>اسم الشبكة<span class="text-danger">*</span></label>
-                        <input id="name" type="text" name="name" class="form-control"
-                               placeholder="اسم الشبكة"
-                               maxlength="500"/>
+                        <input id="name" type="text" name="name" class="form-control" placeholder="اسم الشبكة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>اسم المالك<span class="text-danger">*</span></label>
-                        <input id="owner" type="text" name="owner" class="form-control"
-                               placeholder="اسم المالك"
-                               maxlength="500"/>
+                        <input id="owner" type="text" name="owner" class="form-control" placeholder="اسم المالك" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
@@ -68,9 +56,7 @@
                 <div class="col-md-4">
                 <div class="form-group">
                     <label>اسم الحساب على فيسبوك</label>
-                    <input id="facebook" type="text" name="facebook" class="form-control"
-                           placeholder="اسم الحساب"
-                           maxlength="500"/>
+                    <input id="facebook" type="text" name="facebook" class="form-control" placeholder="اسم الحساب" maxlength="500"/>
 
                     <span class="form-text text-muted text-danger" style="color:red !important"></span>
                 </div>
@@ -78,9 +64,7 @@
                 <div class="col-md-4">
                 <div class="form-group">
                     <label>اسم الحساب على انستغرام</label>
-                    <input id="instagram" type="text" name="instagram" class="form-control"
-                           placeholder="اسم الحساب"
-                           maxlength="500"/>
+                    <input id="instagram" type="text" name="instagram" class="form-control" placeholder="اسم الحساب" maxlength="500"/>
 
                     <span class="form-text text-muted text-danger" style="color:red !important"></span>
                 </div>
@@ -88,9 +72,7 @@
                 <div class="col-md-4">
                 <div class="form-group">
                     <label>رابط موقعك الالكتروني ان وجد</label>
-                    <input id="webUrl" type="text" name="webUrl" class="form-control"
-                           placeholder="رابط الموقع"
-                           maxlength="500"/>
+                    <input id="webUrl" type="text" name="webUrl" class="form-control" placeholder="رابط الموقع" maxlength="500"/>
 
                     <span class="form-text text-muted text-danger" style="color:red !important"></span>
                 </div>
@@ -101,20 +83,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>رابط الدخول للشبكة<span class="text-danger">*</span></label>
-                        <input id="url" type="text" name="url" class="form-control"
-                               placeholder="رابط الشبكة"
-                               maxlength="500"/>
-
+                        <input id="url" type="text" name="url" class="form-control" placeholder="رابط الشبكة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>اختر صورة غلاف الشبكة<span class="text-danger">*</span></label>
-                        <input id="cover" type="file" name="cover" class="form-control"
-                               placeholder=" صورة الغلاف"
-                               maxlength="500"/>
-
+                        <input id="cover" type="file" name="cover" class="form-control" placeholder=" صورة الغلاف" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>

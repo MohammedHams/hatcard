@@ -20,19 +20,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>اسم الفئة<span class="text-danger">*</span></label>
-                        <input id="cname" type="text" value="{{$categoryCard->cname ? :''}}" name="cname" class="form-control"
-                               placeholder="اسم الفئة"
-                               maxlength="500"/>
-                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
+                        <input id="cname" type="text" value="{{$categoryCard->cname ? :''}}" name="cname" class="form-control" placeholder="اسم الفئة" maxlength="500"/>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>سعر الفئة<span class="text-danger">*</span></label>
-                        <input id="price" type="number" value="{{$categoryCard->price ? :''}}"  name="price" class="form-control"
-                               placeholder="سعر الفئة"
-                               maxlength="500"/>
-                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
+                        <input id="price" type="number" value="{{$categoryCard->price ? :''}}"  name="price" class="form-control" placeholder="سعر الفئة" maxlength="500"/>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
 
@@ -41,21 +37,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>فترة البطاقة<span class="text-danger">*</span></label>
-                        <input id="period" type="number" value="{{$categoryCard->period ? :''}}"  name="period" class="form-control"
-                               placeholder="فترة البطاقة"
-                               maxlength="500"/>
-
-                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
+                        <input id="period" type="number" value="{{$categoryCard->period ? :''}}"  name="period" class="form-control" placeholder="فترة البطاقة" maxlength="500"/>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>اختر صورة البطاقة<span class="text-danger">*</span></label>
-                        <input id="photo" type="file" name="photo" class="form-control"
-                               placeholder=" صورة الغلاف"
-                               maxlength="500"/>
-
-                        <div class="alert alert-danger" id="error-alert" style="display: none;"></div>
+                        <input id="photo" type="file" name="photo" class="form-control" placeholder=" صورة الغلاف" maxlength="500"/>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
 

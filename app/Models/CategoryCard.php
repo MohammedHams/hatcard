@@ -31,6 +31,17 @@ class CategoryCard extends Eloquent
     {
         $this->attributes['network'] = new ObjectId($value);
     }
+    public function setPriceAttribute($value)
+    {
+        // Ensure that the value is converted to a numeric representation
+        $this->attributes['price'] = (float) $value;
+    }
+
+    public function setPeriodAttribute($value)
+    {
+        // Ensure that the value is converted to an integer representation
+        $this->attributes['period'] = (int) $value;
+    }
 
     // Override the getDates method to customize timestamp fields
 

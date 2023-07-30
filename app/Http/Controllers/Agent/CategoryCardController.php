@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Agent;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -42,25 +43,24 @@ class CategoryCardController extends Controller
         return view('dashboard.category-cards.create',compact('id'));
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         try {
             // Validate the incoming request data, including image file
-            $validatedData = $request->validate([
-                'cname' => 'required|max:500',
-                'price' => 'required|numeric',
-                'period' => 'required|numeric',
-                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
-                'network' => 'required|exists:networks,_id', // Make sure the network ID exists in the networks collection
-            ]);
+            $validatedData = $request->validated();
 
             // Prepare the data to be saved in the database
             $data = [
                 'cname' => $validatedData['cname'],
                 'price' => $validatedData['price'],
                 'period' => $validatedData['period'],
-                'network' => new ObjectId($validatedData['network']),
+                'network' => ObjectId($validatedData['network']),
             ];
+
+
+
+            // Prepare the data to be saved in the database
+
 
             // Handle the photo upload if provided
             if ($request->hasFile('photo')) {
@@ -126,25 +126,22 @@ class CategoryCardController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         try {
             // Validate the incoming request data, similar to the 'store' function
-            $validatedData = $request->validate([
-                'cname' => 'required|max:500',
-                'price' => 'required|numeric',
-                'period' => 'required|numeric',
-                'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
-                'network' => 'required|exists:networks,_id', // Make sure the network ID exists in the networks collection
-            ]);
+            $validatedData = $request->validated();
 
-            // Prepare the data to be updated in the database
+            // Prepare the data to be saved in the database
             $data = [
                 'cname' => $validatedData['cname'],
                 'price' => $validatedData['price'],
                 'period' => $validatedData['period'],
-                'network' => new ObjectId($validatedData['network']),
+                'network' => ObjectId($validatedData['network']),
             ];
+
+            // Prepare the data to be updated in the database
+
 
             // Find the CategoryCard record by its ID
             $categoryCard = CategoryCard::findOrFail($id);

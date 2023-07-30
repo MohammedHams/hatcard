@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 
+use App\Http\Requests\NetworkRequest;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\Network;
@@ -56,22 +57,11 @@ return view('dashboard.network.create',compact('cities'));
     }
 
 
-    public function store(Request $request)
+    public function store(NetworkRequest $request)
     {
         try {
             // Validate the incoming request data, including image file and URL
-            $validatedData = $request->validate([
-                'name' => 'required|max:500',
-                'owner' => 'required|max:500',
-                'phone' => 'required|numeric|digits:10|phone_format',
-                'city' => 'required',
-                'area' => 'required',
-                'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
-                'url' => 'required|url',
-                'facebook' => 'nullable|string|max:500',
-                'instagram' => 'nullable|string|max:500',
-                'webUrl' => 'nullable|url|max:500',
-            ]);
+            $validatedData = $request->validated();
 
             // Get the authenticated user's ID
             $ownerId = Auth::id();
@@ -140,21 +130,11 @@ return view('dashboard.network.create',compact('cities'));
         return view('dashboard.network.edit',compact('id','network','cities'));
     }
 
-    public function update(Request $request, $id)
+    public function update(NetworkRequest $request, $id)
     {
         try {
             // Validate the incoming request data, including image file and URL
-            $validatedData = $request->validate([
-                'name' => 'required|max:500',
-                'owner' => 'required|max:500',
-                'phone' => 'required|numeric|digits:10|phone_format',
-                'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max file size as needed
-                'url' => 'required|url',
-                'facebook' => 'nullable|string|max:500',
-                'instagram' => 'nullable|string|max:500',
-                'webUrl' => 'nullable|url|max:500',
-            ]);
-
+            $validatedData = $request->validated();
             // Find the network record by ID
             $network = Network::findOrFail($id);
 
