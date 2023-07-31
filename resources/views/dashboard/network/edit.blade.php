@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>اختر صورة غلاف الشبكة<span class="text-danger">*</span></label>
+                        <label>اختر صورة غلاف الشبكة</label>
                         <input id="cover" type="file" name="cover" class="form-control"
                                placeholder=" صورة الغلاف"
                                maxlength="500"/>

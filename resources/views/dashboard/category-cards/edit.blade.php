@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>اختر صورة البطاقة<span class="text-danger">*</span></label>
+                        <label>اختر صورة البطاقة</label>
                         <input id="photo" type="file" name="photo" class="form-control" placeholder=" صورة الغلاف" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
