@@ -109,8 +109,3 @@
         </div>
     </div>
         @endsection
-
-        @push('scripts')
-            <script src="{{ asset('js/network/network.js') }}" class="main-scripts"></script>
-            </script>
-    @endpush

@@ -19,15 +19,12 @@ class CategoryCardController extends Controller
             $row = CategoryCard::where('network', new ObjectId($id))->get();
             return DataTables::of($row)
                 ->addColumn('image', function ($row) {
-                    // Assuming $row->photo contains the relative path to the image within the public directory.
                     $imageUrl = asset($row->photo);
-
-                    // Replace 'your_static_image_url' with the actual URL of the image you want to display.
                     return '<img src="' . $imageUrl . '" alt="Static Image" width="200">';
                 })
 
-                ->addColumn('action', function ($row) {
-                    return view('dashboard.category-cards.components.action', ['id' => $row->_id])->render();
+                ->addColumn('action', function ($row) use ($id) {
+                    return view('dashboard.category-cards.components.action', ['id' => $row->_id,'network_id'=>$id])->render();
                 })
                 ->rawColumns(['image','action'])
                 ->make(true);
@@ -46,15 +43,13 @@ class CategoryCardController extends Controller
     public function store(CategoryRequest $request)
     {
         try {
-            // Validate the incoming request data, including image file
             $validatedData = $request->validated();
-
-            // Prepare the data to be saved in the database
             $data = [
                 'cname' => $validatedData['cname'],
                 'price' => $validatedData['price'],
                 'period' => $validatedData['period'],
-                'network' => ObjectId($validatedData['network']),
+                'periodType' => $validatedData['periodType'],
+                'network' => new ObjectId($validatedData['network']),
             ];
 
 
@@ -137,7 +132,8 @@ class CategoryCardController extends Controller
                 'cname' => $validatedData['cname'],
                 'price' => $validatedData['price'],
                 'period' => $validatedData['period'],
-                'network' => ObjectId($validatedData['network']),
+                'periodType' => $validatedData['periodType'],
+                'network' => new ObjectId($validatedData['network']),
             ];
 
             // Prepare the data to be updated in the database

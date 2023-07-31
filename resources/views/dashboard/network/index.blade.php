@@ -37,4 +37,7 @@
 
 @section('scripts')
     <script src="{{ asset('js/network/network.js')}}" class="main-scripts"></script>
+    <script src="{{ asset('js/categories/category.js')}}" class="main-scripts"></script>
+    <script src="{{ asset('js/cards/cards.js')}}" class="main-scripts"></script>
+
 @endsection

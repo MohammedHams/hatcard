@@ -30,6 +30,7 @@ class CategoryRequest extends FormRequest
             'period' => 'required|numeric',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'network' => 'required|exists:networks,_id',
+            'periodType' => 'required|in:H,D,W,M',
         ];
         if ($this->isMethod('post'))
             $rules['photo'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
@@ -50,6 +51,8 @@ class CategoryRequest extends FormRequest
             'photo.max' => 'يجب أن يكون حجم الصورة أقل من 2 ميجابايت.',
             'network.required' => 'حقل الشبكة مطلوب.',
             'network.exists' => 'الشبكة المحددة غير موجودة.',
+            'periodType.required' => 'حقل نوع البطاقة مطلوب.',
+            'periodType.in' => 'يجب أن يكون نوع البطاقة من بين القيم المسموح بها: بالساعة، يومي، أسبوعي، شهري.',
         ];
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Agent\LoginController;
 use App\Http\Controllers\Agent\DashboardController;
 use App\Http\Controllers\Agent\NetworkController;
+use App\Http\Controllers\Agent\CardController;
 use App\Http\Controllers\Agent\CategoryCardController;
 
 /*
@@ -29,8 +30,11 @@ Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
     Route::resource('/card-category', CategoryCardController::class)->parameters([
         'card-category' => 'id',
     ]);
+    Route::resource('/card', CardController::class)->parameters([
+        'card' => 'id',
+    ]);
 
-    Route::get('/network/{cityId}', [NetworkController::class, 'getAreaByCityId']);
+    Route::get('/network/area/{cityId}', [NetworkController::class, 'getAreaByCityId']);
     Route::get('logout', [DashboardController::class, 'logout'])->name('agent.logout');
     // Other routes that need the 'agent.auth' middleware can be added here
 });

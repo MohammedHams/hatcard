@@ -20,6 +20,6 @@
 
 @endsection
 
-@push('scripts')
+@section('scripts')
     <script src="{{ asset('js/network/network.js') }}"></script>
-@endpush
+@endsection

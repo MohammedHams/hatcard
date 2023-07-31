@@ -1,6 +1,6 @@
-var Networks = function () {
-    var datatable   = $('#datatable_netwroks');
-    var delBtnCls   = ".delete-network-btn";
+var Cards = function () {
+    var datatable   = $('#datatable_cards');
+    var delBtnCls   = ".delete-cards-btn";
     var viewTable   = function () {
         if(datatable.length){
             datatable = FnDataTable(datatable);
@@ -34,32 +34,7 @@ var Networks = function () {
             );
         });
     };
-    var attachEventHandlers = function () {
-        // Event delegation for the change event on #citySelect
-        $(document).on('change', '#citySelect', function () {
-            var cityId = $(this).val();
-            if (cityId) {
-                $.ajax({
-                    url: `/agent/network/area/${cityId}`,
-                    type: 'GET',
-                    data: { cityId: cityId },
-                    dataType: 'json',
-                    success: function (data) {
-                        var options = '<option value="">اختر منطقة</option>';
-                        $.each(data, function (key, area) {
-                            options += '<option value="' + area._id + '">' + area.name + '</option>';
-                        });
-                        $('#areaSelect').html(options);
-                    },
-                    error: function (error) {
-                        console.error('Error fetching areas:', error);
-                    }
-                });
-            } else {
-                $('#areaSelect').html('<option value="">اختر منطقة</option>');
-            }
-        });
-    };
+
 
 
 
@@ -67,7 +42,6 @@ var Networks = function () {
         init: function () {
             viewTable();
             deleteFn();
-            attachEventHandlers();
         }
     };
 }();
@@ -75,5 +49,5 @@ var Networks = function () {
 
 
 jQuery(document).ready(function() {
-    Networks.init();
+    Cards.init();
 });

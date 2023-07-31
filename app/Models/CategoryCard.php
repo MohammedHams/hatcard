@@ -12,7 +12,7 @@ class CategoryCard extends Eloquent
     protected $primaryKey = '_id';
 
     // Define the fillable fields (fields that can be mass-assigned)
-    protected $fillable = ['_id', 'cname', 'photo', 'price', 'period', 'network', 'createdAt', 'slug'];
+    protected $fillable = ['_id', 'cname', 'photo', 'price', 'period','periodType', 'network', 'slug'];
 
     // Enable timestamps for this model
     public $timestamps = true;
@@ -42,7 +42,6 @@ class CategoryCard extends Eloquent
         // Ensure that the value is converted to an integer representation
         $this->attributes['period'] = (int) $value;
     }
-
     // Override the getDates method to customize timestamp fields
 
 

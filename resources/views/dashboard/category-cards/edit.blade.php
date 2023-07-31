@@ -19,15 +19,31 @@
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>اسم الفئة<span class="text-danger">*</span></label>
-                        <input id="cname" type="text" value="{{$categoryCard->cname ? :''}}" name="cname" class="form-control" placeholder="اسم الفئة" maxlength="500"/>
+                        <label for="cname">اسم الفئة<span class="text-danger">*</span></label>
+                        <input id="cname" type="text" name="cname" value="{{$categoryCard->cname ? :'' }}" class="form-control" placeholder="اسم الفئة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>سعر الفئة<span class="text-danger">*</span></label>
-                        <input id="price" type="number" value="{{$categoryCard->price ? :''}}"  name="price" class="form-control" placeholder="سعر الفئة" maxlength="500"/>
+                        <label>نوع البطاقة<span class="text-danger">*</span></label>
+                        <select id="periodType" name="periodType" class="form-control" onclick="changePeriodType()">
+                            <option value="" disabled>اختر نوع البطاقة</option>
+                            <option value="H" {{ $categoryCard->periodType === "H" ? "selected" : "" }}>بالساعة</option>
+                            <option value="D" {{ $categoryCard->periodType === "D" ? "selected" : "" }}>يومي</option>
+                            <option value="W" {{ $categoryCard->periodType === "W" ? "selected" : "" }}>أسبوعي</option>
+                            <option value="M" {{ $categoryCard->periodType === "M" ? "selected" : "" }}>شهري</option>
+                        </select>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-4" id="inputFieldWrapper" style="display: block;">
+                    <div class="form-group">
+                        <label id="periodLabel">فترة البطاقة<span class="text-danger">*</span></label>
+                        <input id="period" value="{{$categoryCard->period? :'' }}"  type="number" name="period" class="form-control" placeholder="" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
@@ -36,8 +52,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>فترة البطاقة<span class="text-danger">*</span></label>
-                        <input id="period" type="number" value="{{$categoryCard->period ? :''}}"  name="period" class="form-control" placeholder="فترة البطاقة" maxlength="500"/>
+                        <label>سعر الفئة<span class="text-danger">*</span></label>
+                        <input id="price" type="number" value="{{$categoryCard->price? :'' }}" name="price" class="form-control" placeholder="سعر الفئة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
