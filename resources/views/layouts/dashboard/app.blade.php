@@ -295,17 +295,6 @@
         <!--begin::Toolbar-->
         <div class="toolbar d-flex flex-stack flex-wrap py-4 gap-2" id="kt_toolbar">
             <!--begin::Page title-->
-            <div class="page-title d-flex flex-column align-items-start me-3 gap-1">
-                <!--begin::Title-->
-                <h1 class="d-flex text-dark fw-bolder m-0 fs-3">الشاشة الرئيسية
-                    <!--begin::Separator-->
-                    <span class="h-20px border-gray-400 border-start mx-3"></span>
-                    <!--end::Separator-->
-                    <!--begin::Description-->
-                    <small class="text-gray-500 fs-7 fw-bold my-1">احصائيات</small>
-                    <!--end::Description--></h1>
-                <!--end::Title-->
-            </div>
             <!--end::Page title-->
             <!--begin::Actions-->
             <!--end::Actions-->

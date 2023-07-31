@@ -42,15 +42,6 @@
                 <!--begin::Form-->
                 <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="{{ route('agent.login') }}" method="POST">
                 @csrf                    <!--begin::Heading-->
-                    <div class="text-center mb-10">
-                        <!--begin::Title-->
-                        <h1 class="text-dark mb-3">Sign In to Metronic</h1>
-                        <!--end::Title-->
-                        <!--begin::Link-->
-                        <div class="text-gray-400 fw-bold fs-4">New Here?
-                            <a href="../../demo19/dist/authentication/layouts/dark/sign-up.html" class="link-primary fw-bolder">Create an Account</a></div>
-                        <!--end::Link-->
-                    </div>
                     @if(session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}

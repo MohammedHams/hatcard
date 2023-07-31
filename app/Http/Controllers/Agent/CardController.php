@@ -21,10 +21,10 @@ class CardController extends Controller
                 ->editColumn('isUsed', function ($row) {
                     $column = "";
                     if ($row->isUsed == true) {
-                        $column = "<span class='badge badge-light-success'>true</span>";
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>مباع</span>";
                     } else {
 
-                        $column = "<span class='badge badge-light-danger'>false</span>";
+                        $column = "<span class='badge badge-light-danger'style='font-size: 14px'>غير مباع</span>";
                     }
                     return $column;
                 })
