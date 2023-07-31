@@ -14,18 +14,21 @@ class CardController extends Controller
     {
         $id = $request->query('id');
         if ($request->ajax() && !$request->has('is_view')) {
-            $cards = Card::where('category', new ObjectId($id))->get();
-            return DataTables::of($cards)
-                ->editColumn('periodType', function ($cards) {
+            $row = Card::where('category', new ObjectId($id))->get();
+
+            return DataTables::of($row)
+                ->addIndexColumn()
+                ->editColumn('isUsed', function ($row) {
                     $column = "";
-                    if ($cards->periodType == "true") {
-                        $column = "<span class='badge badge-light-success'>$cards->periodType</span>";
+                    if ($row->isUsed == true) {
+                        $column = "<span class='badge badge-light-success'>true</span>";
                     } else {
-                        $column = "<span class='badge badge-light-danger'>$cards->periodType</span>";
+
+                        $column = "<span class='badge badge-light-danger'>false</span>";
                     }
                     return $column;
                 })
-                ->rawColumns(['periodType']) // Specify which columns should not be escaped
+                ->rawColumns(['isUsed']) // Specify which columns should not be escaped
                 ->make(true);
         }
 
