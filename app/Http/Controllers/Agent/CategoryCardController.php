@@ -22,11 +22,27 @@ class CategoryCardController extends Controller
                     $imageUrl = asset($row->photo);
                     return '<img src="' . $imageUrl . '" alt="Static Image" width="200">';
                 })
+                ->editColumn('periodType', function ($row) {
+                    $column = "";
+                    if ($row->periodType == 'H') {
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period ساعة</span>";
+                    }
+                    else if ($row->periodType == 'D') {
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period يوم</span>";
+                    }
+                    else if($row->periodType == 'W')  {
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period اسبوع</span>";
+                    }else if($row->periodType == 'M')  {
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period شهر</span>";
+                    }
+                    return $column;
+                })
+
 
                 ->addColumn('action', function ($row) use ($id) {
                     return view('dashboard.category-cards.components.action', ['id' => $row->_id,'network_id'=>$id])->render();
                 })
-                ->rawColumns(['image','action'])
+                ->rawColumns(['image','action','periodType'])
                 ->make(true);
         }
 
