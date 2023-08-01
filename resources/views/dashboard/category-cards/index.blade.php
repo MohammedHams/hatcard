@@ -27,6 +27,7 @@
                                                 <th data-data="cname">اسم الفئة</th>
                                                 <th data-data="price">السعر</th>
                                                 <th data-data="periodType">الفئة</th>
+                                                <th data-data="catCard">عدد البطاقات المتبقية</th>
                                                 <th data-data="image" width="200px" >الصورة</th>
                                                 <th data-data="action" width="100px">اجراءات</th>
                                             </tr>

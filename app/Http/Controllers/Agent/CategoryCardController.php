@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Agent;
 use App\Http\Requests\CategoryRequest;
+use App\Models\Card;
 use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -37,12 +38,15 @@ class CategoryCardController extends Controller
                     }
                     return $column;
                 })
-
+                ->addColumn('catCard', function ($row) use ($id) {
+                    $totalCard = Card::where('network', new ObjectId($id))->where('category',new ObjectId($row->_id))->count();
+                    return $totalCard;
+                })
 
                 ->addColumn('action', function ($row) use ($id) {
                     return view('dashboard.category-cards.components.action', ['id' => $row->_id,'network_id'=>$id])->render();
                 })
-                ->rawColumns(['image','action','periodType'])
+                ->rawColumns(['image','action','periodType','catCard'])
                 ->make(true);
         }
 

@@ -54,17 +54,19 @@ class CardController extends Controller
             }
 
             $rows = array_map(function ($row) {
-                return str_getcsv($row, ';');
+                return str_getcsv($row, ';'); // Use ';' as the separator and '"' as the enclosure character
             }, file($csvFile));
             $rowCount = count($rows) - 1;
+
             foreach ($rows as $row) {
                 if ($isFirstRow) {
                     $isFirstRow = false;
                     continue; // Skip the first row
                 }
 
-                $code = isset($row[0]) ? trim($row[0]) : null;
-                $password = isset($row[1]) ? trim($row[1]) : null;
+                // Remove any double quotes and single quotes and trim spaces from values
+                $code = isset($row[0]) ? preg_replace('/[\'"]/', '', trim($row[0])) : null;
+                $password = isset($row[1]) ? preg_replace('/[\'"]/', '', trim($row[1])) : null;
 
                 $validator = Validator::make([
                     'code' => $code,
