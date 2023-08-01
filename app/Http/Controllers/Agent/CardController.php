@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Agent;
+use App\Models\Report;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use MongoDB\BSON\ObjectId;
 use App\Models\Card;
-
+use Auth;
 class CardController extends Controller
 {
     public function index(Request $request)
@@ -55,7 +56,7 @@ class CardController extends Controller
             $rows = array_map(function ($row) {
                 return str_getcsv($row, ';');
             }, file($csvFile));
-
+            $rowCount = count($rows) - 1;
             foreach ($rows as $row) {
                 if ($isFirstRow) {
                     $isFirstRow = false;
@@ -76,7 +77,7 @@ class CardController extends Controller
                 if ($validator->fails()) {
                     return response()->json(['success' => false, 'errors' => $validator->errors()], 422);
                 }
-
+                $randomNumber = (int) substr(round(now()->timestamp / 100), -7);
                 $data = [
                     'code' => $code,
                     'password' => $password,
@@ -85,8 +86,18 @@ class CardController extends Controller
                     'isUsed' => false,
                 ];
 
+
                 Card::create($data);
             }
+            $Reportdata = [
+                'invoice_number' => $randomNumber,
+                'password' => $password,
+                'category' => new ObjectId($request->input('category')),
+                'network' => new ObjectId($request->input('network')),
+                'quantity' => $rowCount,
+                'user' => new ObjectId(Auth::id()),
+            ];
+            Report::create($Reportdata);
 
             $response = [
                 'success' => true,

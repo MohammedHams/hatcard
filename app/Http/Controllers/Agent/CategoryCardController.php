@@ -20,7 +20,7 @@ class CategoryCardController extends Controller
             return DataTables::of($row)
                 ->addColumn('image', function ($row) {
                     $imageUrl = asset($row->photo);
-                    return '<img src="' . $imageUrl . '" alt="Static Image" width="200">';
+                    return '<img src="' . $imageUrl . '" alt="Static Image" width="100">';
                 })
                 ->editColumn('periodType', function ($row) {
                     $column = "";

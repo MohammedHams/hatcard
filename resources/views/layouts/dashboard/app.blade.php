@@ -91,10 +91,10 @@
                     <!--begin::Logo-->
                     <a href="../../demo19/dist/index.html">
                         <!--begin::Desktop modes-->
-                        <img alt="Logo" src="{{asset('media/logos/logo-1-dark.svg')}}" class="d-none d-lg-inline-block h-30px" />
+                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-none d-lg-inline-block h-30px" />
                         <!--end::Desktop modes-->
                         <!--begin::Table & mobile modes-->
-                        <img alt="Logo" src="{{asset('media/logos/logo-2.svg')}}" class="d-lg-none h-25px" />
+                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-lg-none h-25px" />
                         <!--end::Table & mobile modes-->
                     </a>
                     <!--end::Logo-->

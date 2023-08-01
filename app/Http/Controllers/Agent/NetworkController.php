@@ -12,27 +12,53 @@ use Illuminate\Http\Request; // Corrected the import here
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use MongoDB\BSON\ObjectId;
+use Carbon\Carbon;
 class NetworkController extends Controller
 {
     public function index(Request $request)
     {
       if ($request->ajax()&& !$request->has('is_view')) {
             $row = Network::where('owner_id', new ObjectId(Auth::id()))
-                ->select(['_id', 'name', 'owner', 'phone','cover'])
+                ->select(['_id', 'name', 'city', 'area','cover','status','createdAt'])
                 ->get();
-
-            return DataTables::of($row)
-                ->addColumn('image', function ($row) {
+          return DataTables::of($row)
+                ->addColumn('cover', function ($row) {
 
                     $imageUrl = asset($row->cover);
 
                     // Replace 'your_static_image_url' with the actual URL of the image you want to display.
-                    return '<img src="' . $imageUrl . '" alt="Static Image" width="200">';
+                    return '<img src="' . $imageUrl . '" alt="Static Image" width="100">';
+                })
+              ->addColumn('city_name', function ($row) {
+             $area = City::find($row->city);
+                  return $area ? $area->name : 'N/A';
+              })
+              ->addColumn('area_name', function ($row) {
+                  $area = Area::find($row->area);
+                  return $area ? $area->name : 'N/A';
+              })
+                ->editColumn('status', function ($row) {
+                    $column = "";
+                    if ($row->status == 'approved') {
+                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>تمت الموافقة</span>";
+                    }
+                    else if ($row->status == 'pending') {
+                        $column = "<span class='badge badge-light-warning' style='font-size: 14px'>قيد المراجعة </span>";
+                    }
+                    else if($row->status == 'rejected')  {
+                        $column = "<span class='badge badge-light-danger' style='font-size: 14px'>مرفوض </span>";
+                    }
+                    return $column;
+                })
+                ->editColumn('createdAt', function ($row) {
+                    $carbonDate = Carbon::parse($row->createdAt);
+                    $formattedDate = $carbonDate->format('Y-m-d');
+                    return $formattedDate;
                 })
                 ->addColumn('action', function ($row) {
                     return view('dashboard.network.components.action', ['id' => $row->_id])->render();
                 })
-                ->rawColumns(['image', 'action'])
+                ->rawColumns(['cover', 'action','status','createdAt','city_name','area_name'])
                 ->make(true);
         }
 

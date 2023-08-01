@@ -12,14 +12,6 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label>رقم جوال المالك<span class="text-danger">*</span></label>
-                        <input id="phone" type="number" name="phone" class="form-control" placeholder="رقم جوال المالك" maxlength="500"/>
-                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
                         <label>اسم الشبكة<span class="text-danger">*</span></label>
                         <input id="name" type="text" name="name" class="form-control" placeholder="اسم الشبكة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
@@ -32,11 +24,17 @@
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>رقم جوال المالك<span class="text-danger">*</span></label>
+                        <input id="phone" type="number" name="phone" class="form-control" placeholder="رقم جوال المالك" maxlength="500"/>
+                        <span class="form-text text-muted text-danger" style="color:red !important"></span>
+                    </div>
+                </div>
 
             </div>
             <div class="row">
                 <div class="col-md-6">
-
                 <div class="form-group">
                     {!! Form::label('city', 'المدينة', ['class' => 'control-label']) !!}
                     {!! Form::select('city', $cities->pluck('name', '_id'), null, ['class' => 'form-control', 'placeholder' => 'اختر مدينة', 'id' => 'citySelect']) !!}
@@ -55,7 +53,7 @@
             <div class="row">
                 <div class="col-md-4">
                 <div class="form-group">
-                    <label>اسم الحساب على فيسبوك</label>
+                    <label>رابط حساب فيسبوك الشبكة ان وجد</label>
                     <input id="facebook" type="text" name="facebook" class="form-control" placeholder="اسم الحساب" maxlength="500"/>
 
                     <span class="form-text text-muted text-danger" style="color:red !important"></span>
@@ -63,7 +61,7 @@
                 </div>
                 <div class="col-md-4">
                 <div class="form-group">
-                    <label>اسم الحساب على انستغرام</label>
+                    <label >رابط حساب انستغرام الشبكة ان وجد</label>
                     <input id="instagram" type="text" name="instagram" class="form-control" placeholder="اسم الحساب" maxlength="500"/>
 
                     <span class="form-text text-muted text-danger" style="color:red !important"></span>

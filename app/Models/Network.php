@@ -5,9 +5,12 @@ namespace App\Models;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\BSON\ObjectId;
+use App\Models\City; // Import the City model at the top of the file
+use App\Models\Area; // Import the Area model at the top of the file
 
 class Network extends Eloquent
 {
+
     protected $collection = 'networks'; // Set the name of the MongoDB collection.
 
     protected $fillable = [
@@ -22,6 +25,8 @@ class Network extends Eloquent
         'socialMediaLinks',
         'notes',
         'createdAt',
+        'status',
+        'rejected_Details',
         'updatedAt',
         'slug',
         'owner_id',
@@ -48,6 +53,15 @@ class Network extends Eloquent
     public function setIdAttribute($value)
     {
         $this->attributes['_id'] = new ObjectId($value);
+    }
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        // Set the default value for "status" if not already set
+        if (!isset($this->attributes['status'])) {
+            $this->attributes['status'] = 'pending';
+        }
     }
 
 }

@@ -21,6 +21,11 @@ class City extends Eloquent
         $this->attributes['_id'] = new ObjectId($value);
     }
 
+    public $timestamps = true;
+
+    // Specify the name of the "updated_at" field in the database
+    const UPDATED_AT = 'updatedAt';
+    const CREATED_AT = 'createdAt';
 
     // Define the fillable fields if necessary
     // protected $fillable = ['name', 'population', 'country', ...];

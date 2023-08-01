@@ -100,6 +100,14 @@
                 </div>
 
             </div>
+            @if($network->rejected_Details != null)
+            <div class="alert alert-danger mt-3">
+                <p>سبب الرفض:</p>
+                <ul>
+                        <li>{{ $network->rejected_Details }}</li>
+                </ul>
+            </div>
+            @endif
             <div class="card-footer text-right modal-footer">
                 <button data-close-modal="#OpenModal" data-form-class="network-edit" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
             </div>

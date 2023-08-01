@@ -7,14 +7,14 @@
         <div class="card-body">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="cname">اسم الفئة<span class="text-danger">*</span></label>
+                        <label for="cname">اسم البطاقة<span class="text-danger">*</span></label>
                         <input id="cname" type="text" name="cname" class="form-control" placeholder="اسم الفئة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>نوع البطاقة<span class="text-danger">*</span></label>
                         <select id="periodType" name="periodType" class="form-control" onclick="changePeriodType()">
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label>سعر الفئة<span class="text-danger">*</span></label>
                         <input id="price" type="number" name="price" class="form-control"
-                               placeholder="سعر الفئة"
+                               placeholder="سعر البطاقة"
                                maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>

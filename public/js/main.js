@@ -1,4 +1,4 @@
-var err_msg     = "حدثت مشكلة ، يرجى المحاولة مرة اخرى أو مراجعة مركز تكنولوجيا المعلومات";
+var err_msg     = "حدثت مشكلة أثناء الحفظ.";
 var success_msg = "تمت العملية بنجاح";
 
 function getModalContent(sourceUrl, modalWrapper, Title,modalSize,pageLoad) {

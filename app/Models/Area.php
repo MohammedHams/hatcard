@@ -26,4 +26,11 @@ class Area extends Eloquent
     {
         $this->attributes['city'] = new ObjectId($value);
     }
+    public $timestamps = true;
+
+    // Specify the name of the "updated_at" field in the database
+    const UPDATED_AT = 'updatedAt';
+    const CREATED_AT = 'createdAt';
+
+
 }

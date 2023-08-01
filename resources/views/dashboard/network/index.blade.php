@@ -20,9 +20,11 @@
                         <thead>
                         <tr>
                             <th data-data="name">اسم الشبكة</th>
-                            <th data-data="owner">المالك</th>
-                            <th data-data="image" width="200px" >الصورة</th>
-                            <th data-data="phone">رقم الهاتف</th>
+                            <th data-data="city_name">المدينة</th>
+                            <th data-data="area_name">المنطقة</th>
+                            <th data-data="status">حالة الشبكة</th>
+                            <th data-data="createdAt">تاريخ الانشاء</th>
+                            <th data-data="cover" >الصورة</th>
                             <th data-data="action" width="100px">اجراءات</th>
                         </tr>
                         </thead>
