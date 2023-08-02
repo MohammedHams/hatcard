@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class NetworkRequest extends FormRequest
@@ -22,25 +22,30 @@ class NetworkRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
         $rules = [
             'name' => 'required|max:500',
             'owner' => 'required|max:500',
             'phone' => 'required|numeric|digits:10|phone_format',
-            'city' => 'required',
-            'area' => 'required',
+            'city' => 'nullable',
+            'area' => 'nullable',
             'url' => 'required|url',
             'facebook' => 'nullable|string|max:500',
             'instagram' => 'nullable|string|max:500',
             'webUrl' => 'nullable|url|max:500',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
         ];
 
         if ($this->isMethod('post')) {
             $rules['cover'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+            $rules['city']= 'required';
+          $rules['area'] = 'required';
         }
-
+        if ($this->isMethod('put') && $request->input('status') === 'rejected') {
+            $rules['status'] = 'required';
+        }
         return $rules;
     }
 

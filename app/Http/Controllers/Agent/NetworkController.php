@@ -27,7 +27,7 @@ class NetworkController extends Controller
                     $imageUrl = asset($row->cover);
 
                     // Replace 'your_static_image_url' with the actual URL of the image you want to display.
-                    return '<img src="' . $imageUrl . '" alt="Static Image" width="100">';
+                    return '<img src="' . $imageUrl . '" alt="Static Image" width="100" height="50">';
                 })
               ->addColumn('city_name', function ($row) {
              $area = City::find($row->city);
@@ -56,7 +56,7 @@ class NetworkController extends Controller
                     return $formattedDate;
                 })
                 ->addColumn('action', function ($row) {
-                    return view('dashboard.network.components.action', ['id' => $row->_id])->render();
+                    return view('dashboard.network.components.action', ['id' => $row->_id,'network_name'=>$row->name])->render();
                 })
                 ->rawColumns(['cover', 'action','status','createdAt','city_name','area_name'])
                 ->make(true);
@@ -170,8 +170,16 @@ return view('dashboard.network.create',compact('cities'));
                 return response()->json(['success' => false, 'message' => 'You do not have permission to update this network.'], 403);
             }
 
+        if($request->status){
+            $network->update([
+                'name' => $validatedData['name'],
+                'owner' => $validatedData['owner'],
+                'phone' => $validatedData['phone'],
+                'url' => $validatedData['url'],
+                'status'=>$request->status,
+                ]);
 
-            // Update the network record with the new data
+        }else{
             $network->update([
                 'name' => $validatedData['name'],
                 'owner' => $validatedData['owner'],
@@ -179,6 +187,7 @@ return view('dashboard.network.create',compact('cities'));
                 'url' => $validatedData['url'],
             ]);
 
+        }
             // Handle the image file upload if provided
             if ($request->hasFile('cover')) {
                 // Get the file extension

@@ -21,18 +21,18 @@ class CategoryCardController extends Controller
             return DataTables::of($row)
                 ->addColumn('image', function ($row) {
                     $imageUrl = asset($row->photo);
-                    return '<img src="' . $imageUrl . '" alt="Static Image" width="100">';
+                    return '<img src="' . $imageUrl . '" alt="Static Image" width="50">';
                 })
                 ->editColumn('periodType', function ($row) {
                     $column = "";
                     if ($row->periodType == 'H') {
-                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period ساعة</span>";
+                        $column = "<span class='badge badge-light-primary' style='font-size: 14px'>$row->period ساعة</span>";
                     }
                     else if ($row->periodType == 'D') {
-                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period يوم</span>";
+                        $column = "<span class='badge badge-light-warning' style='font-size: 14px'>$row->period يوم</span>";
                     }
                     else if($row->periodType == 'W')  {
-                        $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period اسبوع</span>";
+                        $column = "<span class='badge badge-light-info' style='font-size: 14px'>$row->period اسبوع</span>";
                     }else if($row->periodType == 'M')  {
                         $column = "<span class='badge badge-light-success' style='font-size: 14px'>$row->period شهر</span>";
                     }

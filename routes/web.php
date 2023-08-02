@@ -17,11 +17,12 @@ use App\Http\Controllers\Agent\CategoryCardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[LoginController::class,'index'])->name('dashboard.index');
 
 Route::post('/login',[LoginController::class,'login'])->name('agent.login');
+Route::get('/',[LoginController::class,'index'])->name('login.index');
 
 Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
+
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::resource('/network', NetworkController::class)->parameters([
@@ -35,6 +36,6 @@ Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
     ]);
 
     Route::get('/network/area/{cityId}', [NetworkController::class, 'getAreaByCityId']);
-    Route::get('logout', [DashboardController::class, 'logout'])->name('agent.logout');
+    Route::get('logout', [LoginController::class, 'logout'])->name('agent.logout');
     // Other routes that need the 'agent.auth' middleware can be added here
 });

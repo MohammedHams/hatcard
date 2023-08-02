@@ -100,17 +100,28 @@
                 </div>
 
             </div>
-            @if($network->rejected_Details != null)
-            <div class="alert alert-danger mt-3">
-                <p>سبب الرفض:</p>
-                <ul>
-                        <li>{{ $network->rejected_Details }}</li>
-                </ul>
-            </div>
+
+
+            @if($network->status == "rejected")
+                <input type="hidden" name="status" value="pending">
+
+                <div class="alert alert-danger mt-3">
+                    <p>سبب الرفض:</p>
+                    <ul>
+                        <li>{!! $network->rejected_Details !!} </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-right modal-footer">
+                    <button data-close-modal="#OpenModal" data-form-class="network-edit" type="button" class="btn btn-danger btn-save mr-2">حفظ وطلب مراجعة</button>
+                </div>
+
+            @else
+                <div class="card-footer text-right modal-footer">
+                    <button data-close-modal="#OpenModal" data-form-class="network-edit" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
+                </div>
+
             @endif
-            <div class="card-footer text-right modal-footer">
-                <button data-close-modal="#OpenModal" data-form-class="network-edit" type="button" class="btn btn-success btn-save mr-2">حفظ</button>
-            </div>
+
 
         {!! Form::close() !!}
         <!--end::Form-->

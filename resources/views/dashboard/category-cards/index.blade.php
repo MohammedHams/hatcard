@@ -24,12 +24,12 @@
                                                style="width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th data-data="cname">اسم الفئة</th>
-                                                <th data-data="price">السعر</th>
-                                                <th data-data="periodType">الفئة</th>
-                                                <th data-data="catCard">عدد البطاقات المتبقية</th>
-                                                <th data-data="image" width="200px" >الصورة</th>
-                                                <th data-data="action" width="100px">اجراءات</th>
+                                                <th data-data="cname" width="100">اسم الفئة</th>
+                                                <th data-data="price" width="100">السعر</th>
+                                                <th data-data="periodType" width="100">الفئة</th>
+                                                <th data-data="catCard" width="100">عدد البطاقات المتبقية</th>
+                                                <th data-data="image" width="100px" >الصورة</th>
+                                                <th data-data="action" width="300px">اجراءات</th>
                                             </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -46,8 +46,6 @@
                     <div class="tab-pane fade" id="tab1" role="tabpanel" aria-labelledby="tab1_sh"></div>
                 </div>
             </div>
-        </div>
-        <div class="card-footer text-right modal-footer">
         </div>
     </div>
 @endsection

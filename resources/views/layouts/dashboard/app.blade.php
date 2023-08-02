@@ -1,3 +1,6 @@
+@php
+  $user =  \App\Models\User::select('phone','balance')->where('_id',Auth::id())->first();
+@endphp
 <!DOCTYPE html>
 <html lang="ar" direction="rtl" dir="rtl" style="direction: rtl">
 <!--begin::Head-->
@@ -21,6 +24,8 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="{{asset('css/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css" />
+
     <style>.svg-loader{
             display:flex;
             position: relative;
@@ -91,10 +96,10 @@
                     <!--begin::Logo-->
                     <a href="../../demo19/dist/index.html">
                         <!--begin::Desktop modes-->
-                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-none d-lg-inline-block h-30px" />
+                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-none d-lg-inline-block h-100px" style="margin-bottom: 5px;" />
                         <!--end::Desktop modes-->
                         <!--begin::Table & mobile modes-->
-                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-lg-none h-25px" />
+                        <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-lg-none h-50px" style="margin-bottom: 5px;" />
                         <!--end::Table & mobile modes-->
                     </a>
                     <!--end::Logo-->
@@ -120,9 +125,9 @@
                                     <!--end::Avatar-->
                                     <!--begin::Username-->
                                     <div class="d-flex flex-column">
-                                        <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-                                            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                        <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::user()->name}}
+                                            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">الرصيد : {{$user->balance}}</span></div>
+                                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{$user->phone}}</a>
                                     </div>
                                     <!--end::Username-->
                                 </div>
@@ -133,20 +138,21 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="../../demo19/dist/account/overview.html" class="menu-link px-5">My Profile</a>
+                                <a href="#" class="menu-link px-5"><i class="bi bi-person" style="font-size: 16px;margin-left: 5px"></i>الملف الشخصي</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="../../demo19/dist/apps/projects/list.html" class="menu-link px-5">
-                                    <span class="menu-text">My Projects</span>
-                                    <span class="menu-badge">
+                                <a href="{{route('network.index')}}" class="menu-link px-5">
+                                    <span class="menu-text"><i class="bi bi-wifi" style="font-size: 16px;margin-left: 5px"></i>شبكاتي</span>
+                                    {{--<span class="menu-badge">
 												<span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
-											</span>
+											</span>--}}
                                 </a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
+{{--
                             <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
                                 <a href="#" class="menu-link px-5">
                                     <span class="menu-title">My Subscription</span>
@@ -258,24 +264,17 @@
                                 <a href="../../demo19/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
                             </div>
                             <!--end::Menu item-->
+--}}
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="{{route('agent.login')}}" class="menu-link px-5">Sign Out</a>
+                                <a href="{{route('agent.logout')}}" class="menu-link px-5"><i class="bi bi-box-arrow-in-right" style="font-size: 16px;margin-left: 5px"></i>تسجيل خروج</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu separator-->
                             <div class="separator my-2"></div>
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
-                            <div class="menu-item px-5">
-                                <div class="menu-content px-5">
-                                    <label class="form-check form-switch form-check-custom form-check-solid pulse pulse-success" for="kt_user_menu_dark_mode_toggle">
-                                        <input class="form-check-input w-30px h-20px" type="checkbox" value="1" name="mode" id="kt_user_menu_dark_mode_toggle" data-kt-url="../../demo19/dist/index.html" />
-                                        <span class="pulse-ring ms-n1"></span>
-                                        <span class="form-check-label text-gray-600 fs-7">Dark Mode</span>
-                                    </label>
-                                </div>
-                            </div>
+
                             <!--end::Menu item-->
                         </div>
                         <!--end::User account menu-->

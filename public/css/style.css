@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+label {
+    margin: 12px 2px 10px 0;
+}
+th,
+td {
+    text-align: center;
+}
+table .badge {
+    font-size: 16px;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    padding: 10px 5px !important;
+    font-size: 12px;
+}
+.menu-item.icons .menu-link i {
+    margin-left: 5px;/* Adjust the spacing as needed */
+}

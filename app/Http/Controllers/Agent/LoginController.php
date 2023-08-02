@@ -11,10 +11,7 @@ class LoginController extends Controller
     public function index()
     {
 
-        $users = User::all();
-
         return view('login.index');
-
     }
 
 
@@ -42,7 +39,7 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login'); // Replace 'login' with the route name for your login page
+        return redirect()->route('login.index'); // Replace 'login' with the route name for your login page
     }
 
 

@@ -35,8 +35,6 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer text-right modal-footer">
-        </div>
     </div>
 @endsection
 
