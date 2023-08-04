@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" />
     <!--end::Fonts-->
     <!--begin::Page Vendor Stylesheets(used by this page)-->
-    <link href="{{asset('plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('plugins/custom/datatables/datatables.dark.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!--end::Page Vendor Stylesheets-->
@@ -70,6 +69,7 @@
 </head>
 <!--begin::Body-->
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
@@ -360,6 +360,7 @@
 <!--begin::Page Vendors Javascript(used by this page)-->
 <script src="{{asset('plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @yield('scripts')
+<script></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 </body>

@@ -5,13 +5,13 @@
         <div class="menu menu-column menu-lg-row menu-active-bg menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold my-5 my-lg-0 align-items-stretch flex-grow-1" id="kt_header_menu" data-kt-menu="true">
             <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('dashboard.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
 
-                <a class="menu-link py-3" href="{{route('dashboard.index')}}">
+                <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('dashboard.index')}}">
                     <span class="menu-title">الشاشة الرئيسية</span>
                                             </a>
 
             </div>
             <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('network.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
-                <a class="menu-link py-3" href="{{route('network.index')}}">
+                <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('network.index')}}">
 										<span class="menu-title">شبكاتي</span>
 
                 </a>

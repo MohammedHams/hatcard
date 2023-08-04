@@ -43,7 +43,7 @@
                 <div class="col-md-4" id="inputFieldWrapper" style="display: block;">
                     <div class="form-group">
                         <label id="periodLabel">فترة البطاقة<span class="text-danger">*</span></label>
-                        <input id="period" value="{{$categoryCard->period? :'' }}"  type="number" name="period" class="form-control" placeholder="" maxlength="500"/>
+                        <input id="period" value="{{$categoryCard->period? :'' }}" min="0" type="number" name="period" class="form-control" placeholder="" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>سعر الفئة<span class="text-danger">*</span></label>
-                        <input id="price" type="number" value="{{$categoryCard->price? :'' }}" name="price" class="form-control" placeholder="سعر الفئة" maxlength="500"/>
+                        <input id="price" type="number" value="{{$categoryCard->price? :'' }}" min="0" name="price" class="form-control" placeholder="سعر الفئة" maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>
                     </div>
                 </div>

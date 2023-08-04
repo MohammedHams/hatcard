@@ -31,7 +31,7 @@
                 <div class="col-md-4" id="inputFieldWrapper" style="display: none;">
                     <div class="form-group">
                         <label id="periodLabel">فترة البطاقة<span class="text-danger">*</span></label>
-                        <input id="period" type="number" name="period" class="form-control"
+                        <input id="period" type="number" min="0" name="period" class="form-control"
                                placeholder=""
                                maxlength="500"/>
 
@@ -44,7 +44,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>سعر الفئة<span class="text-danger">*</span></label>
-                        <input id="price" type="number" name="price" class="form-control"
+                        <input id="price" type="number" min="0" name="price" class="form-control"
                                placeholder="سعر البطاقة"
                                maxlength="500"/>
                         <span class="form-text text-muted text-danger" style="color:red !important"></span>

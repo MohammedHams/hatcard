@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use MongoDB\BSON\ObjectId;
+use League\Csv\Reader;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\Card;
 use Auth;
 class CardController extends Controller
@@ -43,7 +46,7 @@ class CardController extends Controller
         return view('dashboard.cards.create', compact('id', 'network_id'));
     }
 
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
         try {
             $csvFile = $request->file('csv');
@@ -112,6 +115,55 @@ class CardController extends Controller
             // If any exception occurs, return an error response with an appropriate message
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
+    }*/
+    public function store(Request $request)
+    {
+
+            $csvFile = $request->file('csv');
+/*            $isFirstRow = true;*/
+
+        if ($csvFile) {
+            $csv = Reader::createFromPath($csvFile->getPathname());
+            $csv->setDelimiter(';'); // Set the delimiter used in your CSV
+
+            // Create a new instance of the Spreadsheet class
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+
+            // Iterate through CSV rows and populate the Excel sheet
+            $row = 1;
+            foreach ($csv as $csvRow) {
+                $col = 1;
+                foreach ($csvRow as $value) {
+                    // Split the value into separate parts using the delimiter
+                    $parts = explode(';', $value);
+
+                    // Set values in separate columns and remove double quotation marks
+                    foreach ($parts as $part) {
+                        $cleanedPart = str_replace('"', '', $part);
+                        $sheet->setCellValueByColumnAndRow($col, $row, $cleanedPart);
+
+                        $col++;
+                    }
+                }
+                $row++;
+            }
+
+            // Save the Excel file in the public directory
+            $publicExcelPath = public_path('excel_output.xlsx');
+            $writer = new Xlsx($spreadsheet);
+            $writer->save($publicExcelPath);
+
+            return response()->download($publicExcelPath)->deleteFileAfterSend(false);
+        }
+
+        return redirect()->back()->with('error', 'Please upload a CSV file.');
     }
 
+
+
+
+
+
 }
+
