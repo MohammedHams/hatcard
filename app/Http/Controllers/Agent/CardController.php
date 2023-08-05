@@ -126,7 +126,6 @@ class CardController extends Controller
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
 
-            $row = 1;
             $filteredDataForDb = [];
             $isFirstRow = true;
 
@@ -135,28 +134,25 @@ class CardController extends Controller
                     $isFirstRow = false;
                     continue;
                 }
-                if (strpos($csvRow[0], '"') !== false) {
-                    $parts = str_getcsv($csvRow[0], ';');
-                    $code = $parts[1];
-                    $password = $parts[2];
-                } else {
-                    $code = $csvRow[1];
-                    $password = $csvRow[0];
+                if (count($csvRow) == 1) {
+                    $cleanedValue = trim($csvRow[0], '"');
+                    $csvRow = explode(';', $cleanedValue);
                 }
-
-
                 $cleanedRow = array_map(function ($value) {
                     return str_replace('"', '', $value);
                 }, $csvRow);
+                $code = isset($cleanedRow[1]) ? $cleanedRow[1] : null;
+                $password = isset($cleanedRow[2]) ? $cleanedRow[2] : null;
+                if ($code !== null && $password !== null) {
+                    $filteredDataForDb[] = [
+                        'code' => $code,
+                        'password' => $password,
+                        'category' => new ObjectId($request->input('category')),
+                        'network' => new ObjectId($request->input('network')),
+                        'isUsed' => false,
+                    ];
 
-                $filteredDataForDb[] = [
-                    'code' => $code,
-                    'password' => $password,
-                    'category' => new ObjectId($request->input('category')),
-                    'network' => new ObjectId($request->input('network')),
-                    'isUsed' => false,
-                    'cleanedRow' => $cleanedRow, // Save the cleaned row if needed
-                ];
+                }
             }
             Card::insert($filteredDataForDb);
 
