@@ -180,8 +180,8 @@ class CardController extends Controller
                 // Add other cell values as needed
             }
             Report::create($Reportdata);
-
-            $fileName = "files/network_{$request->input('network')}.category_{$request->input('category')}.xlsx";
+            $now = now()->format('Ymd_His');
+            $fileName = "files/network_{$request->input('network')}.category_{$request->input('category')}_{$now}.xlsx";
             $filteredExcelPath = public_path($fileName);
 
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
