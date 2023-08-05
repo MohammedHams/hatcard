@@ -1,0 +1,47 @@
+$btn-bg-color: #004B97;
+$btn-txt-color: #fff;
+
+%button-default{
+    color: $btn-txt-color;
+    background-color: $btn-bg-color;
+    padding: 10px;
+    border:0px;
+    font-size: 20px;
+    width: 200px;
+    height: 60px;
+    outline: 0;
+    display:block;
+    margin:10px 0;
+}
+
+button.load-button{
+    @extend %button-default;
+    span{
+        transition: all 1s;
+        opacity:1;
+    }
+    svg{
+        display:none;
+        margin:0 auto;
+        transition: all 1s;
+        path,rect{
+            fill: $btn-txt-color;
+        }
+    }
+}
+
+button.loading-start{
+    span{
+        display: none;
+        opacity: 0;
+    }
+    svg{
+        display: block;
+        opacity: 1;
+    }
+}
+
+div.btn-content{
+    float: left;
+    margin: 0 20px;
+}

@@ -308,6 +308,7 @@ $(document).on("click", ".btn-search", function (){
 // });
 
 $(document).on("click", ".btn-save", function (){
+
     var formClass = ($(this).data('form-class') !== undefined) ?  ("."+ $(this).data('form-class')) : $(".submit-form");
     var pageLoad  = $(this).data('page-load');
     var isClose  = $(this).data('close-modal');
@@ -329,6 +330,7 @@ $(document).on("click", ".btn-save", function (){
 
     Confirm('رسالة تأكيد',messageConfirm,
         function () {
+            $(".svg-hide").show();
             $.ajax({
                 url: form.attr("action"),
                 type: form.attr("method"),
@@ -339,6 +341,7 @@ $(document).on("click", ".btn-save", function (){
                 },
                 data: formData,
                 success: function (json) {
+                    $(".svg-hide").hide();
                     if(typeof isClose !== undefined )         // use this if you are using id to check
                     {
                         $(isClose).modal('hide');
@@ -353,6 +356,7 @@ $(document).on("click", ".btn-save", function (){
                     }
                 },
                 error: function (jqXhr, json, errorThrown) {
+                    $(".svg-hide").hide();
                     var errors = jqXhr.responseJSON;
                     if (jqXhr.status == 422) {
                         $.each(errors.errors, function (key, value) {
@@ -368,7 +372,6 @@ $(document).on("click", ".btn-save", function (){
             });
         },
         function (){
-
         }
     );
 });

@@ -23,16 +23,10 @@ class LoginController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        // Try to authenticate the user using phone and password
         if (Auth::attempt(['phone' => $validatedData['phone'], 'password' => $validatedData['password']])) {
-            // Authentication successful
-            // You can perform any additional actions here, like setting up user sessions, etc.
 
-            // For example, if you want to redirect the user after successful authentication
             return redirect(route('dashboard.index'));
         } else {
-            // Authentication failed
-            // Redirect back with an error message or return a JSON response with an error message
             return back()->with('error', 'رقم الجوال أو كلمة السر خاطئة');
         }
     }

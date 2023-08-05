@@ -26,7 +26,6 @@ class NetworkController extends Controller
 
                     $imageUrl = asset($row->cover);
 
-                    // Replace 'your_static_image_url' with the actual URL of the image you want to display.
                     return '<img src="' . $imageUrl . '" alt="Static Image" width="100" height="50">';
                 })
               ->addColumn('city_name', function ($row) {
@@ -68,12 +67,8 @@ class NetworkController extends Controller
 
     public function show($id)
     {
-        // Fetch the specific network record based on the given $id
         $network = Network::findOrFail($id);
 
-        // You can add any additional logic here if needed
-
-        // Return the view to display the specific network details
         return view('dashboard.network.show', compact('network'));
     }
     public function create()
@@ -86,13 +81,10 @@ return view('dashboard.network.create',compact('cities'));
     public function store(NetworkRequest $request)
     {
         try {
-            // Validate the incoming request data, including image file and URL
             $validatedData = $request->validated();
 
-            // Get the authenticated user's ID
             $ownerId = Auth::id();
 
-            // Create a new network instance with basic details
             $network = new Network([
                 'name' => $validatedData['name'],
                 'owner' => $validatedData['owner'],
@@ -103,34 +95,26 @@ return view('dashboard.network.create',compact('cities'));
                 'owner_id' => $ownerId,
             ]);
 
-            // Save the new network record to the collection
             $network->save();
 
-            // Handle the image file upload if provided
             if ($request->hasFile('cover')) {
-                // Get the file extension
                 $fileExtension = $request->file('cover')->getClientOriginalExtension();
 
-                // Define the directory where the file will be stored
                 $directory = 'imgs/networks/network-' . $network->_id;
 
-                // Save the image file to the specified directory
                 $fileName = 'imageCover.' . $fileExtension;
                 $request->file('cover')->move(public_path($directory), $fileName);
 
 
-                // Update the network record with the image URL
                 $network->update(['cover' => $directory . '/' . $fileName]);
             }
 
-            // Handle social media links if provided
             $socialMediaLinks = [
                 'facebook' => $validatedData['facebook'] ? 'https://www.facebook.com/' . $validatedData['facebook'] : null,
                 'instagram' => $validatedData['instagram'] ? 'https://www.instagram.com/' . $validatedData['instagram'] : null,
                 'webUrl' => $validatedData['webUrl'],
             ];
 
-            // Update the network record with the social media links
             $network->update(['socialMediaLinks' => $socialMediaLinks]);
 
             $response = [
@@ -139,13 +123,10 @@ return view('dashboard.network.create',compact('cities'));
                 'data' => $network, // Optionally, you can send back the newly created network data in the response
             ];
 
-            // Return the JSON response
             return response()->json($response);
         } catch (ValidationException $e) {
-            // If validation fails, return the validation errors as a JSON response
             return response()->json($e->errors(), 422);
         } catch (\Exception $e) {
-            // If any other exception occurs, return an error response with an appropriate message
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
     }
@@ -159,12 +140,8 @@ return view('dashboard.network.create',compact('cities'));
     public function update(NetworkRequest $request, $id)
     {
         try {
-            // Validate the incoming request data, including image file and URL
             $validatedData = $request->validated();
-            // Find the network record by ID
             $network = Network::findOrFail($id);
-
-            // Check if the authenticated user owns this network
             $ownerId = new ObjectId(Auth::id());
             if ((string) $network->owner_id !== (string) $ownerId) {
                 return response()->json(['success' => false, 'message' => 'You do not have permission to update this network.'], 403);
@@ -188,45 +165,32 @@ return view('dashboard.network.create',compact('cities'));
             ]);
 
         }
-            // Handle the image file upload if provided
             if ($request->hasFile('cover')) {
-                // Get the file extension
                 $fileExtension = $request->file('cover')->getClientOriginalExtension();
-
-                // Define the directory where the file will be stored
                 $directory = 'imgs/networks/network-' . $network->_id;
-
-                // Save the image file to the specified directory
                 $fileName = 'imageCover.' . $fileExtension;
                 $request->file('cover')->move(public_path($directory), $fileName);
-
-                // Update the network record with the new image URL
                 $network->update(['cover' => $directory . '/' . $fileName]);
             }
 
-            // Handle social media links if provided
             $socialMediaLinks = [
                 'facebook' => $validatedData['facebook'] ? 'https://www.facebook.com/' . $validatedData['facebook'] : null,
                 'instagram' => $validatedData['instagram'] ? 'https://www.instagram.com/' . $validatedData['instagram'] : null,
                 'webUrl' => $validatedData['webUrl'],
             ];
 
-            // Update the network record with the social media links
             $network->update(['socialMediaLinks' => $socialMediaLinks]);
 
             $response = [
                 'success' => true,
                 'message' => 'تم تحديث الشبكة بنجاح!',
-                'data' => $network, // Optionally, you can send back the updated network data in the response
+                'data' => $network,
             ];
 
-            // Return the JSON response
             return response()->json($response);
         } catch (ValidationException $e) {
-            // If validation fails, return the validation errors as a JSON response
             return response()->json($e->errors(), 422);
         } catch (\Exception $e) {
-            // If any other exception occurs, return an error response with an appropriate message
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
     }
@@ -235,8 +199,6 @@ return view('dashboard.network.create',compact('cities'));
     public function destroy($id)
     {
     }
-    // Example controller method to fetch areas based on city ID
-// Example controller method to fetch areas based on city ID
     public function getAreaByCityId($cityId)
     {
         $cityId = new ObjectId($cityId);

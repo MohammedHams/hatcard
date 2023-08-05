@@ -5,12 +5,11 @@ use App\Models\Report;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use MongoDB\BSON\ObjectId;
 use League\Csv\Reader;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Models\Card;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Auth;
 class CardController extends Controller
 {
@@ -32,11 +31,11 @@ class CardController extends Controller
                     }
                     return $column;
                 })
-                ->rawColumns(['isUsed']) // Specify which columns should not be escaped
+                ->rawColumns(['isUsed'])
                 ->make(true);
         }
 
-        return view('dashboard.cards.index')->with('id', $id); // Pass $id to the view.
+        return view('dashboard.cards.index')->with('id', $id);
     }
 
     public function create(Request $request)
@@ -118,47 +117,95 @@ class CardController extends Controller
     }*/
     public function store(Request $request)
     {
-
-            $csvFile = $request->file('csv');
-/*            $isFirstRow = true;*/
+        $csvFile = $request->file('csv');
 
         if ($csvFile) {
             $csv = Reader::createFromPath($csvFile->getPathname());
             $csv->setDelimiter(';'); // Set the delimiter used in your CSV
 
-            // Create a new instance of the Spreadsheet class
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
 
-            // Iterate through CSV rows and populate the Excel sheet
             $row = 1;
+            $filteredDataForDb = [];
+            $isFirstRow = true;
+
             foreach ($csv as $csvRow) {
-                $col = 1;
-                foreach ($csvRow as $value) {
-                    // Split the value into separate parts using the delimiter
-                    $parts = explode(';', $value);
-
-                    // Set values in separate columns and remove double quotation marks
-                    foreach ($parts as $part) {
-                        $cleanedPart = str_replace('"', '', $part);
-                        $sheet->setCellValueByColumnAndRow($col, $row, $cleanedPart);
-
-                        $col++;
-                    }
+                if ($isFirstRow) {
+                    $isFirstRow = false;
+                    continue;
                 }
-                $row++;
+                if (strpos($csvRow[0], '"') !== false) {
+                    $parts = str_getcsv($csvRow[0], ';');
+                    $code = $parts[1];
+                    $password = $parts[2];
+                } else {
+                    $code = $csvRow[1];
+                    $password = $csvRow[0];
+                }
+
+
+                $cleanedRow = array_map(function ($value) {
+                    return str_replace('"', '', $value);
+                }, $csvRow);
+
+                $filteredDataForDb[] = [
+                    'code' => $code,
+                    'password' => $password,
+                    'category' => new ObjectId($request->input('category')),
+                    'network' => new ObjectId($request->input('network')),
+                    'isUsed' => false,
+                    'cleanedRow' => $cleanedRow, // Save the cleaned row if needed
+                ];
             }
+            Card::insert($filteredDataForDb);
 
-            // Save the Excel file in the public directory
-            $publicExcelPath = public_path('excel_output.xlsx');
-            $writer = new Xlsx($spreadsheet);
-            $writer->save($publicExcelPath);
+            $randomNumber = (int) substr(round(now()->timestamp / 100), -7);
+            $rowCount = count($filteredDataForDb);
 
-            return response()->download($publicExcelPath)->deleteFileAfterSend(false);
+            $Reportdata = [
+                'invoice_number' => $randomNumber,
+                'password' => $filteredDataForDb[0]['password'], // Change this if needed
+                'category' => new ObjectId($request->input('category')),
+                'network' => new ObjectId($request->input('network')),
+                'quantity' => $rowCount,
+                'status' => 'unpaid',
+                'user' => new ObjectId(Auth::id()),
+            ];
+
+            foreach ($filteredDataForDb as $index => $data) {
+                $rowIndex = $index + 1;
+                $sheet->setCellValue('A' . $rowIndex, $data['code']);
+                $sheet->setCellValue('B' . $rowIndex, $data['password']);
+                // Add other cell values as needed
+            }
+            Report::create($Reportdata);
+
+            $fileName = "files/network_{$request->input('network')}.category_{$request->input('category')}.xlsx";
+            $filteredExcelPath = public_path($fileName);
+
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save($filteredExcelPath);
+
+
+            $response = [
+                'success' => true,
+                'message' => 'تم إضافة البطاقات بنجاح!',
+                'data' => $filteredDataForDb, // Send the processed card data in the response
+            ];
+
+            return response()->json($response);
         }
 
-        return redirect()->back()->with('error', 'Please upload a CSV file.');
+        // Handle case where no CSV file was uploaded
+        $response = [
+            'success' => false,
+            'message' => 'No CSV file was uploaded.',
+        ];
+
+        return response()->json($response);
     }
+
 
 
 
