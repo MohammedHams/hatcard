@@ -11,6 +11,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use App\Models\Card;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Auth;
+use App\Http\Requests\CardRequest;
 class CardController extends Controller
 {
     public function index(Request $request)
@@ -48,7 +49,9 @@ class CardController extends Controller
 /*    public function store(Request $request)
     {
         try {
+
             $csvFile = $request->file('csv');
+
             $isFirstRow = true;
 
             if (!$csvFile) {
@@ -115,7 +118,7 @@ class CardController extends Controller
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
     }*/
-    public function store(Request $request)
+    public function store(CardRequest $request)
     {
         $csvFile = $request->file('csv');
 
