@@ -26,7 +26,6 @@ class CategoryCard extends Eloquent
         $this->attributes['_id'] = new ObjectId($value);
     }
 
-    // Automatically convert the "network" attribute to MongoDB ObjectId
     public function setNetworkAttribute($value)
     {
         $this->attributes['network'] = new ObjectId($value);
@@ -42,9 +41,4 @@ class CategoryCard extends Eloquent
         // Ensure that the value is converted to an integer representation
         $this->attributes['period'] = (int) $value;
     }
-    // Override the getDates method to customize timestamp fields
-
-
-    // Override the default format for timestamps
-
 }

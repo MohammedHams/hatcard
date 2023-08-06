@@ -1,17 +1,14 @@
 <?php
 
 namespace App\Models;
-
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\BSON\ObjectId;
-use App\Models\City; // Import the City model at the top of the file
-use App\Models\Area; // Import the Area model at the top of the file
 
 class Network extends Eloquent
 {
 
     protected $collection = 'networks'; // Set the name of the MongoDB collection.
+    protected $primaryKey = '_id';
 
     protected $fillable = [
         '_id',
@@ -36,7 +33,10 @@ class Network extends Eloquent
     // Specify the name of the "updated_at" field in the database
     const UPDATED_AT = 'updatedAt';
     const CREATED_AT  = 'createdAt';
-
+    public function setIdAttribute($value)
+    {
+        $this->attributes['_id'] = new ObjectId($value);
+    }
     public function setCityAttribute($value)
     {
         $this->attributes['city'] = new ObjectId($value);
@@ -50,10 +50,7 @@ class Network extends Eloquent
     {
         $this->attributes['owner_id'] = new ObjectId($value);
     }
-    public function setIdAttribute($value)
-    {
-        $this->attributes['_id'] = new ObjectId($value);
-    }
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

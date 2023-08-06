@@ -26,8 +26,8 @@ class CategoryRequest extends FormRequest
     {
         $rules = [
             'cname' => 'required|max:500',
-            'price' => 'required|numeric',
-            'period' => 'required|numeric',
+            'price' => 'required|numeric|min:1',
+            'period' => 'required|numeric|min:1',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'network' => 'required|exists:networks,_id',
             'periodType' => 'required|in:H,D,W,M',

@@ -14,8 +14,7 @@
     <i class="bi bi-eye"></i> عرض البطاقات
 </button>
 
-
-<button type="button" data-title="رفع البطاقات"  data-size="modal-lg"  href="{!! route('card.create', ['id'=>$id]) !!}"
+<button type="button" data-title="رفع البطاقات"  data-size="modal-lg"  href="{!! route('card.create', ['id'=>$id,'network'=>$network_id]) !!}"
         class="btn btn-info btn-sm m-1 openModal">
     <i class="bi bi-card-heading"></i> رفع بطاقات
 </button>

@@ -6,7 +6,7 @@
 <!--begin::Head-->
 <head><base href="">
 
-    <title>Metronic - the world's #1 selling Bootstrap Admin Theme Ecosystem for HTML, Vue, React, Angular &amp; Laravel by Keenthemes</title>
+    <title>لوحة تحكم تطبيق HatCard</title>
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
@@ -145,6 +145,15 @@
                             <div class="menu-item px-5">
                                 <a href="{{route('network.index')}}" class="menu-link px-5">
                                     <span class="menu-text"><i class="bi bi-wifi" style="font-size: 16px;margin-left: 5px"></i>شبكاتي</span>
+                                    {{--<span class="menu-badge">
+												<span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
+											</span>--}}
+                                </a>
+                            </div>
+
+                            <div class="menu-item px-5">
+                                <a href="{{route('report.index')}}" class="menu-link px-5">
+                                    <span class="menu-text"><i class="bi bi-credit-card" style="font-size: 16px;margin-left: 5px"></i>تقارير رفع البطاقات</span>
                                     {{--<span class="menu-badge">
 												<span class="badge badge-light-danger badge-circle fw-bolder fs-7">3</span>
 											</span>--}}
@@ -335,6 +344,7 @@
 
 <!--end::Own Scripts-->
 <script>
+
     $(function (){
         $(".modal-content" ).draggable()
         // activate the menu in left side bar based on url

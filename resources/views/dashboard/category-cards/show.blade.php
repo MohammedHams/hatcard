@@ -5,7 +5,7 @@
     <div class="card card-custom main-content">
         <div class="card-header">
             <h3 class="card-title">
-                تفاصيل الشبكة
+                تقارير الرفع
             </h3>
         </div>
         <div class="card-body">

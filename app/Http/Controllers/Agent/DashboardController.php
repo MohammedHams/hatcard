@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Agent;
 use App\Models\Card;
 use App\Models\CategoryCard;
-use App\Models\Report;
+use App\Models\CardReport;
 use MongoDB\BSON\ObjectId;
 use App\Http\Controllers\Controller;
 use App\Models\Network;
@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
         $totalCategory = CategoryCard::whereIn('network', $userNetworkIds)->count();
         $totalCard = Card::whereIn('network', $userNetworkIds)->count();
-        $totalUploadedCard = Report::whereIn('network', $userNetworkIds)->sum('quantity');
+        $totalUploadedCard = CardReport::whereIn('network', $userNetworkIds)->sum('quantity');
         $totalNetworks = $userNetworkIds->count();
         return view('dashboard.index', compact('totalSales', 'totalNetworks','totalCategory','totalCard','totalPaidCards','totalUploadedCard'));
     }

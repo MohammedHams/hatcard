@@ -14,7 +14,7 @@
 </button>
 
 
-<button type="button" data-title="تعديل بيانات الشبكة"  data-size="modal-lg"  href="{{ route('network.edit', ['id'=>$id]) }}"
+<button type="button" data-title="تعديل بيانات الشبكة"  data-size="modal-xl"  href="{{ route('network.edit', ['id'=>$id]) }}"
         class="btn btn-success btn-sm m-1 openModal">
     <i class="bi bi-pencil"></i> تعديل
 

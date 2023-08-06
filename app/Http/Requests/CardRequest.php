@@ -25,7 +25,7 @@ class CardRequest extends FormRequest
     public function rules()
     {
         return [
-            'csv' => 'required|mimes:csv,txt|max:2048', // Adjust the maximum file size as needed
+            'csv' => 'required|file|mimes:csv|max:2048', // Adjust the maximum file size as needed
             // Add other validation rules for your form fields
         ];
     }
@@ -34,9 +34,8 @@ class CardRequest extends FormRequest
     {
         return [
             'csv.required' => 'حقل الملف مطلوب.',
-            'csv.mimes' => 'يجب أن يكون الملف من نوع CSV أو TXT.',
+            'csv.mimes' => 'يجب أن يكون الملف من نوع CSV .',
             'csv.max' => 'حجم الملف لا يجب أن يتجاوز :max كيلوبايت.',
-            // Add custom messages for other validation rules
         ];
     }
 }

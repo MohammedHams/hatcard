@@ -12,7 +12,15 @@
             </div>
             <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('network.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
                 <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('network.index')}}">
-										<span class="menu-title">شبكاتي</span>
+
+
+                    <span class="menu-title">شبكاتي</span>
+
+                </a>
+            </div>
+            <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('report.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
+                <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('report.index')}}">
+                    <span class="menu-title">تقارير رفع البطاقات</span>
 
                 </a>
             </div>

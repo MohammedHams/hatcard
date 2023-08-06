@@ -6,7 +6,7 @@ use App\Http\Controllers\Agent\DashboardController;
 use App\Http\Controllers\Agent\NetworkController;
 use App\Http\Controllers\Agent\CardController;
 use App\Http\Controllers\Agent\CategoryCardController;
-
+use App\Http\Controllers\Agent\CardReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +21,7 @@ use App\Http\Controllers\Agent\CategoryCardController;
 Route::post('/login',[LoginController::class,'login'])->name('agent.login');
 Route::get('/',[LoginController::class,'index'])->name('login.index');
 
-Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
+Route::group(['middleware' => 'agent.auth', 'prefix' => 'overview'], function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -34,7 +34,9 @@ Route::group(['middleware' => 'agent.auth', 'prefix' => 'agent'], function () {
     Route::resource('/card', CardController::class)->parameters([
         'card' => 'id',
     ]);
-
+    Route::resource('/report', CardReportController::class)->parameters([
+        'report' => 'id',
+    ]);
     Route::get('/network/area/{cityId}', [NetworkController::class, 'getAreaByCityId']);
     Route::get('logout', [LoginController::class, 'logout'])->name('agent.logout');
     // Other routes that need the 'agent.auth' middleware can be added here

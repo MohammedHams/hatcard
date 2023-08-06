@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Agent;
-use App\Models\Report;
+use App\Models\CardReport;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -104,7 +104,7 @@ class CardController extends Controller
                 'quantity' => $rowCount,
                 'user' => new ObjectId(Auth::id()),
             ];
-            Report::create($Reportdata);
+            CardReport::create($Reportdata);
 
             $response = [
                 'success' => true,
@@ -118,11 +118,15 @@ class CardController extends Controller
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
     }*/
-    public function store(CardRequest $request)
+    public function store(Request $request)
     {
+       $cat =  $request->input('category');
+        $existingCodes = Card::where('category',new ObjectId($cat))->pluck('code')->toArray();
         $csvFile = $request->file('csv');
+        $extension = $csvFile->getClientOriginalExtension();
+        // Dump and die to see the file extension
 
-        if ($csvFile) {
+        if ($csvFile && $extension === 'csv') {
             $csv = Reader::createFromPath($csvFile->getPathname());
             $csv->setDelimiter(';'); // Set the delimiter used in your CSV
 
@@ -144,9 +148,12 @@ class CardController extends Controller
                 $cleanedRow = array_map(function ($value) {
                     return str_replace('"', '', $value);
                 }, $csvRow);
-                $code = isset($cleanedRow[1]) ? $cleanedRow[1] : null;
-                $password = isset($cleanedRow[2]) ? $cleanedRow[2] : null;
-                if ($code !== null && $password !== null) {
+                    $codeIndex = count($csvRow)-2;
+                    $passIndex = count($csvRow)-1;
+
+                $code = isset($cleanedRow[$codeIndex]) ? $cleanedRow[$codeIndex] : null;
+                $password = isset($cleanedRow[$passIndex]) ? $cleanedRow[$passIndex] : null;
+                if ($code !== null && $password !== null && !in_array($code, $existingCodes)) {
                     $filteredDataForDb[] = [
                         'code' => $code,
                         'password' => $password,
@@ -159,7 +166,7 @@ class CardController extends Controller
             }
             Card::insert($filteredDataForDb);
 
-            $randomNumber = (int) substr(round(now()->timestamp / 100), -7);
+            $randomNumber = (int) substr(round(microtime(true) * 1000), -7);
             $rowCount = count($filteredDataForDb);
 
             $Reportdata = [
@@ -178,7 +185,7 @@ class CardController extends Controller
                 $sheet->setCellValue('B' . $rowIndex, $data['password']);
                 // Add other cell values as needed
             }
-            Report::create($Reportdata);
+            CardReport::create($Reportdata);
             $now = now()->format('Ymd_His');
             $fileName = "files/network_{$request->input('network')}.category_{$request->input('category')}_{$now}.xlsx";
             $filteredExcelPath = public_path($fileName);
@@ -197,19 +204,12 @@ class CardController extends Controller
         }
 
         // Handle case where no CSV file was uploaded
-        $response = [
-            'success' => false,
-            'message' => 'No CSV file was uploaded.',
-        ];
 
         return response()->json($response);
     }
 
-
-
-
-
-
-
+    public function show($id)
+    {
+    }
 }
 

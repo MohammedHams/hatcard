@@ -1,4 +1,6 @@
+
 *{
+    font-size: 16px;
     box-sizing: border-box;
 }
 label {
@@ -7,6 +9,9 @@ label {
 th,
 td {
     text-align: center;
+}
+table{
+    line-height: 4;
 }
 table .badge {
     font-size: 16px;
@@ -18,4 +23,26 @@ tbody, td, tfoot, th, thead, tr {
 }
 .menu-item.icons .menu-link i {
     margin-left: 5px;/* Adjust the spacing as needed */
+}
+.table.gy-5 td, .table.gy-5 th {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    border: 1px solid #dfebf6;
+}
+.menu-title-gray-800 .menu-item .menu-link .menu-title {
+    color: #ffffff;
+}
+.drawer {
+    display: flex!important;
+    overflow: auto;
+    z-index: 110;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: #480776;
+    transition: transform .3s ease-in-out;
+}
+.svg-icon.svg-icon-2 svg {
+    height: 2.5rem!important;
+    width: 3.5rem!important;
 }
