@@ -27,6 +27,7 @@ class Network extends Eloquent
         'updatedAt',
         'slug',
         'owner_id',
+        'benefit',
     ];
     public $timestamps = true;
 

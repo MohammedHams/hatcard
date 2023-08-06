@@ -42,10 +42,10 @@
             <div class="card bg-light-primary card-xl-stretch mb-5 mb-xl-8">
                 <!--begin::Body-->
                 <div class="card-body my-3">
-                    <a href="#" class="card-title fw-bolder text-primary fs-5 mb-3 d-block">نسبة الفائدة</a>
+                    <a href="#" class="card-title fw-bolder text-primary fs-5 mb-3 d-block">نسبة التطبيق</a>
                     <div class="py-1">
-                        <span class="text-dark fs-1 fw-bolder me-2">10%</span>
-                        <span class="fw-bold text-muted fs-7">{{$totalSales * 10/100}} شيكل </span>
+                        <span class="text-dark fs-1 fw-bolder me-2">{{$benifit ?? 0}}%</span>
+                        <span class="fw-bold text-muted fs-7">{{$totalSales * ($benifit ?? 0 /100)  }} شيكل </span>
                     </div>
                     <div class="progress h-7px bg-primary bg-opacity-50 mt-7">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
