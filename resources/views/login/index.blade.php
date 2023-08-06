@@ -150,39 +150,6 @@
 <script src="{{asset('js/scripts.bundle.js')}}"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
-<script>
-    KTApp.init({
-        // Initialization options, if any
-    });
-
-    // Now you can use KTApp functions
-    const button = document.querySelector("#kt_page_loading_message");
-
-    button.addEventListener("click", function() {
-    button.addEventListener("click", function() {
-        // Populate the page loading element dynamically.
-        // Optionally you can skipt this part and place the HTML
-        // code in the body element by refer to the above HTML code tab.
-        const loadingEl = document.createElement("div");
-        document.body.prepend(loadingEl);
-        loadingEl.classList.add("page-loader");
-        loadingEl.classList.add("flex-column");
-        loadingEl.innerHTML = `
-        <span class="spinner-border text-primary" role="status"></span>
-        <span class="text-muted fs-6 fw-semibold mt-5">Loading...</span>
-    `;
-
-        // Show page loading
-        KTApp.showPageLoading();
-
-        // Hide after 3 seconds
-        setTimeout(function() {
-            KTApp.hidePageLoading();
-            loadingEl.remove();
-        }, 3000);
-    });
-
-</script>
 
 </body>
 <!--end::Body-->
