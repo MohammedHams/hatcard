@@ -94,7 +94,7 @@
                     </div>
                     <!--end::Heaeder menu toggle-->
                     <!--begin::Logo-->
-                    <a href="../../demo19/dist/index.html">
+                    <a href="{{route('dashboard.index')}}">
                         <!--begin::Desktop modes-->
                         <img alt="Logo" src="{{asset('images/logo.png')}}" class="d-none d-lg-inline-block h-100px" style="margin-bottom: 5px;" />
                         <!--end::Desktop modes-->

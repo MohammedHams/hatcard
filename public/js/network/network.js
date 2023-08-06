@@ -40,7 +40,7 @@ var Networks = function () {
             var cityId = $(this).val();
             if (cityId) {
                 $.ajax({
-                    url: `/agent/network/area/${cityId}`,
+                    url: `/overview/network/area/${cityId}`,
                     type: 'GET',
                     data: { cityId: cityId },
                     dataType: 'json',

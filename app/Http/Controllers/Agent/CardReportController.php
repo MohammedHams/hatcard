@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Models\CardReport;
+use App\Models\Network;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,14 @@ class CardReportController extends Controller
     {
         if ($request->ajax() && !$request->has('is_view')) {
 
-            $userReports = CardReport::where('user', new ObjectId(Auth::id()))->get();
+            $networkIds = Network::where('owner_id',new ObjectId(Auth::id()))->pluck('_id')->toArray();
+
+            $objectIdNetworkIds = array_map(function ($id) {
+                return new ObjectId($id);
+            }, $networkIds);
+
+// Now $objectIdNetworkIds contains an array of ObjectId instances
+            $userReports = CardReport::whereIn('network', $objectIdNetworkIds)->get();
             return DataTables::of($userReports)
                 ->addIndexColumn()
                 ->editColumn('status', function ($row) {

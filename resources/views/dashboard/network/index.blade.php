@@ -5,7 +5,7 @@
     <div class="card card-custom gutter-b">
         <div class="card-header card-header-stretch flex-wrap py-3">
             <div class="card-toolbar p-3">
-                <button type="button" data-title="اضافة شبكة" data-size="modal-lg"  href="{{ route('network.create') }}"
+                <button type="button" data-title="اضافة شبكة" data-size="modal-xl"  href="{{ route('network.create') }}"
                         class="btn btn-success font-weight-bold openModal">
                     <i class="fa fa-plus"></i>
                     اضافة شبكة
