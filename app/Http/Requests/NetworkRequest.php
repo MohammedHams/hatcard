@@ -30,10 +30,10 @@ class NetworkRequest extends FormRequest
             'phone' => 'required|numeric|digits:10|phone_format',
             'city' => 'nullable',
             'area' => 'nullable',
-            'url' => 'required|url',
+            'url' => 'required',
             'facebook' => 'nullable|string|max:500',
             'instagram' => 'nullable|string|max:500',
-            'webUrl' => 'nullable|url|max:500',
+            'webUrl' => 'nullable|max:500',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
         ];
