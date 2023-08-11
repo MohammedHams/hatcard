@@ -8,8 +8,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>اختر ملف البطاقات<span class="text-danger">*</span> (CSV.)</label>
-                        <input id="csv" type="file" name="csv" class="form-control"
+                        <label>اختر ملف البطاقات<span class="text-danger">*</span> (xls, xlsx.)</label>
+                        <input id="csv" type="file" name="excel" class="form-control"
                                placeholder=" ملف csv"
                                maxlength="500"/>
 

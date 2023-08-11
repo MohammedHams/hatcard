@@ -117,7 +117,7 @@ class CardController extends Controller
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
     }*/
-    public function store(Request $request)
+/*    public function store(Request $request)
     {
        $cat =  $request->input('category');
         $existingCodes = Card::where('category',new ObjectId($cat))->pluck('code')->toArray();
@@ -208,7 +208,98 @@ class CardController extends Controller
         ], 403);
         // Handle case where no CSV file was uploaded
 
+    }*/
+
+    public function store(Request $request)
+    {
+        $excelFile = $request->file('excel'); // Change 'csv' to 'excel'
+        $extension = $excelFile->getClientOriginalExtension();
+
+        // Validate file extension
+        $allowedExtensions = ['xls', 'xlsx'];
+        if (!in_array($extension, $allowedExtensions)) {
+            return response()->json([
+                'error' => true,
+                'code' => 403,
+                'message' => 'Invalid file format! Only Excel files are allowed.',
+            ], 403);
+        }
+
+        if ($excelFile && in_array($extension, $allowedExtensions)) {
+            $spreadsheet = IOFactory::load($excelFile->getPathname()); // Load the Excel file
+            $sheet = $spreadsheet->getActiveSheet();
+
+            $filteredDataForDb = [];
+            $isFirstRow = true;
+
+            foreach ($sheet->getRowIterator() as $row) {
+                if ($isFirstRow) {
+                    $isFirstRow = false;
+                    continue;
+                }
+
+                $code = $sheet->getCell('A' . $row->getRowIndex())->getValue(); // Value from column A (1st column)
+                $password = $sheet->getCell('B' . $row->getRowIndex())->getValue();
+                if ($code !== null && $password !== null) {
+                    $filteredDataForDb[] = [
+                        'code' => $code,
+                        'password' => $password,
+                        'category' => new ObjectId($request->input('category')),
+                        'network' => new ObjectId($request->input('network')),
+                        'isUsed' => false,
+                    ];
+
+                }
+            }
+            Card::insert($filteredDataForDb);
+
+            $randomNumber = (int) substr(round(microtime(true) * 1000), -7);
+            $rowCount = count($filteredDataForDb);
+
+            $Reportdata = [
+                'invoice_number' => $randomNumber,
+                'password' => $filteredDataForDb[0]['password'], // Change this if needed
+                'category' => new ObjectId($request->input('category')),
+                'network' => new ObjectId($request->input('network')),
+                'quantity' => $rowCount,
+                'status' => 'unpaid',
+                'user' => new ObjectId(Auth::id()),
+            ];
+            $filteredSpreadsheet = new Spreadsheet();
+            $filteredSheet = $filteredSpreadsheet->getActiveSheet();
+
+            foreach ($filteredDataForDb as $index => $data) {
+                $rowIndex = $index + 1;
+                $filteredSheet->setCellValue('A' . $rowIndex, $data['code']);
+                $filteredSheet->setCellValue('B' . $rowIndex, $data['password']);
+                // Add other cell values as needed
+            }
+            CardReport::create($Reportdata);
+
+            $now = now()->format('Ymd_His');
+            $fileName = "files/network_{$request->input('network')}/category_{$request->input('category')}/{$now}.xlsx";
+            $filteredExcelPath = public_path($fileName);
+            $filteredWriter = IOFactory::createWriter($filteredSpreadsheet, 'Xlsx');
+            $filteredWriter->save($filteredExcelPath);
+
+
+            $response = [
+                'success' => true,
+                'message' => 'تم إضافة البطاقات بنجاح!',
+                'data' => $filteredDataForDb, // Send the processed card data in the response
+            ];
+
+            return response()->json($response);
+        }
+        return response()->json([
+            'error' => true,
+            'code' => 403,
+            'message' => 'حدث خطأ ما! ',
+        ], 403);
+        // Handle case where no CSV file was uploaded
+
     }
+
 
     public function show($id)
     {
