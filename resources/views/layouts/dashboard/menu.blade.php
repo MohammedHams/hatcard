@@ -31,7 +31,8 @@
 @endif
 
 
-@if(auth()->user()->role === 'agent' ||auth()->user()->role ==='distributor' )                    <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('top-up.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
+@if(auth()->user()->role === 'agent' ||auth()->user()->role ==='distributor' ||auth()->user()->role ==='admin')
+        <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('top-up.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
         <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('top-up.index')}}">
             <span class="menu-title">تحويل أرصدة</span>
 
@@ -40,6 +41,15 @@
 
 
     @endif
+            @if(auth()->user()->role === 'admin')
+        <div  data-kt-menu-placement="bottom-start" class="menu-item {{ request()->routeIs('product.index') ? 'here' : '' }} menu-lg-down-accordion me-lg-1">
+
+        <a class="menu-link py-3" id="kt_page_loading_message" href="{{route('product.index')}}">
+            <span class="menu-title">المنتجات</span>
+
+        </a>
+        </div>
+            @endif
 
 
 

@@ -8,6 +8,8 @@ use App\Http\Controllers\Agent\CardController;
 use App\Http\Controllers\Agent\CategoryCardController;
 use App\Http\Controllers\Agent\CardReportController;
 use App\Http\Controllers\Distributor\BalancesController;
+use App\Http\Controllers\Admin\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +32,13 @@ Route::group(['middleware' => ['agent.distributor.auth']], function() {
     Route::resource('/top-up', BalancesController::class);
 
 });
+Route::group(['middleware' => ['admin.auth']], function() {
 
+    Route::resource('/product', ProductController::class)->parameters([
+        'product' => 'id',
+    ]);
+
+});
 Route::group(['middleware' => ['agent.auth'], 'prefix' => 'overview'], function () {
 
 

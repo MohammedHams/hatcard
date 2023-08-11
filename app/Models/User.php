@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use MongoDB\BSON\ObjectId;
@@ -39,6 +38,8 @@ class User extends Eloquent implements Authenticatable
         'email',
         'password',
         'phone',
+        'last_seen',
+        'login_source',
         'balance',
         'role',
     ];
@@ -107,5 +108,10 @@ class User extends Eloquent implements Authenticatable
     {
         return $this->role === 'distributor';
     }
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
 
 }
