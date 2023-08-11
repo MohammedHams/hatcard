@@ -1,3 +1,4 @@
+{{--
 @extends('layouts.dashboard.app')
 
 @section('content')
@@ -47,3 +48,4 @@
 @section('scripts')
     <script src="{{ asset('js/network/network.js')}}" class="main-scripts"></script>
 @endsection
+--}}

@@ -46,3 +46,11 @@ tbody, td, tfoot, th, thead, tr {
     height: 2.5rem!important;
     width: 3.5rem!important;
 }
+.btn-violet {
+    background-color: #805ad5;
+    color: #fff;
+}
+
+.btn-violet:hover {
+    background-color: #6b46c1;
+}

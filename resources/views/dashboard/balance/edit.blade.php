@@ -1,3 +1,4 @@
+{{--
 @extends('layouts.dashboard.app')
 @section('content')
     <div class="card card-custom main-content">
@@ -145,3 +146,4 @@
         </div>
     </div>
         @endsection
+--}}

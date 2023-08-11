@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Agent;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Card;
-use App\Models\CardReport;
 use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request; // Corrected the import here
-use Illuminate\Support\Facades\Auth;
 use App\Models\CategoryCard;
 use MongoDB\BSON\ObjectId;
 

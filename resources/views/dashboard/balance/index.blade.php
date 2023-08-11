@@ -5,9 +5,9 @@
     <div class="card card-custom gutter-b">
         <div class="card-header card-header-stretch flex-wrap py-3">
             <div class="card-toolbar p-3">
-                <button type="button" data-title="اضافة شبكة" data-size="modal-m"  href="{{ route('top-up.create') }}"
-                        class="btn btn-success font-weight-bold openModal">
-                    <i class="fa fa-plus"></i>
+                <button type="button" data-title="تحويل رصيد" data-size="modal-m"  href="{{ route('top-up.create') }}"
+                        class="btn  btn-violet font-weight-bold openModal text-white">
+                    <i class="fa fa-paper-plane text-white"></i>
                     تحويل رصيد
                 </button>
             </div>
