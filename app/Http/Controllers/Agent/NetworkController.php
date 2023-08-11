@@ -18,9 +18,8 @@ class NetworkController extends Controller
     public function index(Request $request)
     {
       if ($request->ajax()&& !$request->has('is_view')) {
-            $row = Network::where('owner_id', new ObjectId(Auth::id()))
-                ->select(['_id', 'name', 'city', 'area','cover','status','createdAt'])
-                ->get();
+          $row = Network::where('owner_id', new ObjectId(Auth::id())) ->orderBy('createdAt')
+              ->select(['_id', 'name', 'city', 'area', 'cover', 'status', 'createdAt'])->get();
           return DataTables::of($row)
                 ->addColumn('cover', function ($row) {
 
@@ -67,13 +66,13 @@ class NetworkController extends Controller
 
     public function show($id)
     {
-        $network = Network::findOrFail($id);
+        $network = Network::findOrFail($id)->orderBy('createdAt');
 
         return view('dashboard.network.show', compact('network'));
     }
     public function create()
     {
-        $cities = City::all();
+        $cities = City::all()->orderBy('createdAt');
 return view('dashboard.network.create',compact('cities'));
     }
 
@@ -132,8 +131,8 @@ return view('dashboard.network.create',compact('cities'));
     }
     public function edit($id)
     {
-        $cities = City::all();
-        $network = Network::findOrFail($id);
+        $cities = City::all()->orderBy('createdAt');
+        $network = Network::findOrFail($id)->orderBy('createdAt');
         return view('dashboard.network.edit',compact('id','network','cities'));
     }
 
@@ -141,7 +140,7 @@ return view('dashboard.network.create',compact('cities'));
     {
         try {
             $validatedData = $request->validated();
-            $network = Network::findOrFail($id);
+            $network = Network::findOrFail($id)->orderBy('createdAt');
             $ownerId = new ObjectId(Auth::id());
             if ((string) $network->owner_id !== (string) $ownerId) {
                 return response()->json(['success' => false, 'message' => 'You do not have permission to update this network.'], 403);

@@ -26,7 +26,7 @@ class AgentAuthMiddleware
             }
         }
 
-        // User is not authenticated or does not have the 'agent' role, redirect or return an error response as needed
-        return redirect()->route('login.index')->with('error','لا توجد صلاحية لك على هذا النظام');
+        Auth::logout();
+        return redirect()->route('login.index')->with('error','ليس لديك صلاحية !');
     }
 }

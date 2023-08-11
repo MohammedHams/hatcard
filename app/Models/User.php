@@ -98,5 +98,14 @@ class User extends Eloquent implements Authenticatable
     {
         $this->attributes['_id'] = new ObjectId($value);
     }
+    public function isAgent()
+    {
+        return $this->role === 'agent';
+    }
+
+    public function isDistributor()
+    {
+        return $this->role === 'distributor';
+    }
 
 }

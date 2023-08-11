@@ -11,7 +11,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use App\Models\Card;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Auth;
-use App\Http\Requests\CardRequest;
 class CardController extends Controller
 {
     public function index(Request $request)

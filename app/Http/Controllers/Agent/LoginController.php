@@ -12,9 +12,11 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             return redirect()->route('dashboard.index');
+        }else{
+            return view('login.index');
+
         }
 
-        return view('login.index');
     }
 
 

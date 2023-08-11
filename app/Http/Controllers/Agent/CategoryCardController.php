@@ -18,7 +18,7 @@ class CategoryCardController extends Controller
     {
         $id = $request->query('id');
         if ($request->ajax()&& !$request->has('is_view')) {
-            $row = CategoryCard::where('network', new ObjectId($id))->get();
+            $row = CategoryCard::where('network', new ObjectId($id))->orderBy('createdAt')->get();
             return DataTables::of($row)
                 ->addColumn('image', function ($row) {
                     $imageUrl = asset($row->photo);

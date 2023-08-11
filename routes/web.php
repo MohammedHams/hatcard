@@ -7,6 +7,7 @@ use App\Http\Controllers\Agent\NetworkController;
 use App\Http\Controllers\Agent\CardController;
 use App\Http\Controllers\Agent\CategoryCardController;
 use App\Http\Controllers\Agent\CardReportController;
+use App\Http\Controllers\Distributor\BalancesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,12 +19,20 @@ use App\Http\Controllers\Agent\CardReportController;
 |
 */
 
-Route::post('/login',[LoginController::class,'login'])->name('agent.login');
-Route::get('/',[LoginController::class,'index'])->name('login.index');
-
-Route::group(['middleware' => 'agent.auth', 'prefix' => 'overview'], function () {
-
+Route::post('/login', [LoginController::class, 'login'])->name('agent.login');
+Route::get('/login', [LoginController::class, 'index'])->name('login.index'); // Change this line
+Route::group(['middleware' => ['auth']], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+});
+
+Route::group(['middleware' => ['agent.distributor.auth']], function() {
+
+    Route::resource('/top-up', BalancesController::class);
+
+});
+
+Route::group(['middleware' => ['agent.auth'], 'prefix' => 'overview'], function () {
+
 
     Route::resource('/network', NetworkController::class)->parameters([
         'network' => 'id',

@@ -24,7 +24,7 @@ class CardReportController extends Controller
             }, $networkIds);
 
 // Now $objectIdNetworkIds contains an array of ObjectId instances
-            $userReports = CardReport::whereIn('network', $objectIdNetworkIds)->get();
+            $userReports = CardReport::whereIn('network', $objectIdNetworkIds)->orderBy('createdAt')->get();
             return DataTables::of($userReports)
                 ->addIndexColumn()
                 ->editColumn('status', function ($row) {
