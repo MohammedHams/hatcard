@@ -201,10 +201,13 @@ class CardController extends Controller
 
             return response()->json($response);
         }
-
+        return response()->json([
+            'error' => true,
+            'code' => 403,
+            'message' => 'حدث خطأ ما! ',
+        ], 403);
         // Handle case where no CSV file was uploaded
 
-        return response()->json($response);
     }
 
     public function show($id)

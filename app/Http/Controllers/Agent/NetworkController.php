@@ -124,7 +124,7 @@ return view('dashboard.network.create',compact('cities'));
 
             return response()->json($response);
         } catch (ValidationException $e) {
-            return response()->json($e->errors(), 422);
+            return response()->json($e->errors(), 403);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
@@ -188,7 +188,7 @@ return view('dashboard.network.create',compact('cities'));
 
             return response()->json($response);
         } catch (ValidationException $e) {
-            return response()->json($e->errors(), 422);
+            return response()->json($e->errors(), 403);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
         }
