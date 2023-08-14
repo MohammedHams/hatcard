@@ -10,11 +10,10 @@ class AgentDistributorMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->isAgent() || auth()->user()->isDistributor()|| auth()->user()->isAdmin()) {
+        if (auth()->check() && (auth()->user()->isAgent() || auth()->user()->isDistributor() || auth()->user()->isAdmin())) {
             return $next($request);
         }
         Auth::logout();
-        return redirect()->route('login.index')->with('error','ليس لديك صلاحية !');
-
+        return redirect()->route('login.index')->with('error', 'ليس لديك صلاحية !');
     }
 }
