@@ -18,6 +18,14 @@
     <link href="{{asset('plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XCXPLDBP19"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XCXPLDBP19');
+    </script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->

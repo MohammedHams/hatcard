@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html lang="ar" direction="rtl" dir="rtl" style="direction: rtl">
 <!--begin::Head-->
-<head><base href="">
+<head>
+    <base href="">
 
     <title>لوحة تحكم تطبيق HatCard</title>
     <meta charset="utf-8" />
@@ -66,6 +67,15 @@
     </style>
     <!--end::Global Stylesheets Bundle-->
     @stack('styles')
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XCXPLDBP19"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XCXPLDBP19');
+    </script>
 </head>
 <!--begin::Body-->
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
