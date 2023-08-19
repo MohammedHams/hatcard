@@ -238,8 +238,8 @@ class CardController extends Controller
                     continue;
                 }
 
-                $code = $sheet->getCell('A' . $row->getRowIndex())->getValue(); // Value from column A (1st column)
-                $password = $sheet->getCell('B' . $row->getRowIndex())->getValue();
+                $code = (string)$sheet->getCell('A' . $row->getRowIndex())->getValue(); // Value from column A (1st column)
+                $password = (string)$sheet->getCell('B' . $row->getRowIndex())->getValue();
                 if ($code !== null && $password !== null) {
                     $filteredDataForDb[] = [
                         'code' => $code,
@@ -247,6 +247,8 @@ class CardController extends Controller
                         'category' => new ObjectId($request->input('category')),
                         'network' => new ObjectId($request->input('network')),
                         'isUsed' => false,
+                        'createdAt'=>new \MongoDB\BSON\UTCDateTime(new \DateTime('now')),
+                        'updatedAt'=>new \MongoDB\BSON\UTCDateTime(new \DateTime('now')),
                     ];
 
                 }

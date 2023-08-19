@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['phone' => $validatedData['phone'], 'password' => $validatedData['password']])) {
             $user = Auth::user();
-            $user->last_seen = new \MongoDB\BSON\UTCDateTime(new \DateTime('now'));;
+            $user->last_seen = new \MongoDB\BSON\UTCDateTime(new \DateTime('now'));
             $user->login_source = 'web';
             $user->save();
 

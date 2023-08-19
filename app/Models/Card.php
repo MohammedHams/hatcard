@@ -9,7 +9,6 @@ use MongoDB\BSON\ObjectId;
 
 class Card extends Eloquent
 {
-    protected $connection = 'mongodb'; // Set the MongoDB connection
 
     protected $collection = 'cards'; // Set the MongoDB collection name
 
@@ -22,6 +21,8 @@ class Card extends Eloquent
         'category',
         'network',
         'isUsed',
+        'createdAt',
+        'updatedAt',
     ];
 
     public $timestamps = true;
