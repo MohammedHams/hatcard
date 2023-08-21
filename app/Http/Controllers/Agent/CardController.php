@@ -281,6 +281,10 @@ class CardController extends Controller
             $now = now()->format('Ymd_His');
             $fileName = "files/network_{$request->input('network')}/category_{$request->input('category')}/{$now}.xlsx";
             $filteredExcelPath = public_path($fileName);
+            $directoryPath = dirname($filteredExcelPath);
+            if (!file_exists($directoryPath)) {
+                mkdir($directoryPath, 0777, true); // Adjust permissions as needed
+            }
             $filteredWriter = IOFactory::createWriter($filteredSpreadsheet, 'Xlsx');
             $filteredWriter->save($filteredExcelPath);
 
