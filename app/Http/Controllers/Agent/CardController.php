@@ -240,7 +240,7 @@ class CardController extends Controller
 
                 $code = (string)$sheet->getCell('A' . $row->getRowIndex())->getValue(); // Value from column A (1st column)
                 $password = (string)$sheet->getCell('B' . $row->getRowIndex())->getValue();
-                if ($code !== null && $password !== null) {
+                if (($code !== "" && $code !== null) && ($password !== "" && $password !== null)) {
                     $filteredDataForDb[] = [
                         'code' => $code,
                         'password' => $password,
